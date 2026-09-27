@@ -1,0 +1,17 @@
+{
+  "name": "Cuines Jan",
+  "short_name": "Cuines Jan",
+  "description": "Menú vegetariano de dos semanas, recetas, lista de la compra, despensa y guía de alimentos.",
+  "lang": "es",
+  "start_url": "./#menu",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F3F5EF",
+  "theme_color": "#F3F5EF",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Menú vegetariano de dos semanas, recetas, lista de la compra, despensa y guía de alimentos.">
+<meta name="theme-color" content="#F3F5EF">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cuines Jan">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<title>Cuines Jan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Young+Serif&display=swap">
+<style>
+  :root {
+    --bg: #F3F5EF;
+    --surface: #FFFFFF;
+    --sunken: #E8EBE3;
+    --ink: #1C211D;
+    --muted: #5B645C;
+    --line: #DADFD5;
+    --accent: #6A2B5B;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #F2E7EF;
+    --olive: #55661A;
+    --olive-soft: #EBEFD9;
+    --olive-ink: #3E4B10;
+    --season: #B4501A;
+    --frz: #1F5F86;
+    --frz-soft: #E3EEF5;
+    --f-d: #2F7A4B;
+    --f-s: #1F6F7A;
+    --f-w: #9A5C16;
+    --f-o: #6B7280;
+    --f-p: #6A2B5B;
+    --pill-ink: #FFFFFF;
+    --shadow: 0 1px 2px rgba(28, 33, 29, 0.08);
+    --display: "Young Serif", Georgia, "Times New Roman", serif;
+    --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.45;
+    padding-inline: 16px; padding-block: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body.lock { overflow: hidden; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  .wrap { max-width: 640px; margin: 0 auto; padding-block: 0 104px; }
+
+  /* Cabecera */
+  .top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: var(--bg); margin-inline: -16px; padding-inline: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .top-in { max-width: 640px; margin: 0 auto; padding-block: 12px 10px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .top h1 { font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1.15; margin: 2px 0 0; text-wrap: balance; }
+  .top .sub { color: var(--muted); font-size: 14px; margin-top: 2px; }
+
+  /* Barra inferior */
+  .tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+    background: var(--surface); border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tabs-in { max-width: 640px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
+  .tabs button {
+    background: none; border: 0; padding: 9px 2px 10px; color: var(--muted);
+    font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .tabs svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .tabs button[aria-current="page"] { color: var(--accent); font-weight: 700; }
+
+  /* Piezas comunes */
+  .view { display: flex; flex-direction: column; gap: 14px; padding-top: 14px; }
+  .seg { display: flex; gap: 3px; background: var(--sunken); border-radius: 11px; padding: 3px; }
+  .seg button { flex: 1; border: 0; background: transparent; padding: 9px 6px; border-radius: 8px; font-weight: 700; color: var(--muted); font-size: 15px; }
+  .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+  .h2 { font-family: var(--display); font-weight: 400; font-size: 20px; margin: 10px 0 -4px; }
+  .lede { color: var(--muted); font-size: 14.5px; margin: 0; }
+  .note-box { background: var(--sunken); border-radius: 10px; padding: 10px 12px; font-size: 14.5px; color: var(--ink); }
+  .chip {
+    border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+    padding: 6px 12px; font-size: 14.5px; font-weight: 700; text-align: left;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bdg { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; line-height: 1.5; }
+  .bdg.batch { background: var(--olive-soft); color: var(--olive-ink); }
+  .bdg.frz { background: var(--frz-soft); color: var(--frz); }
+  .bdg.home { background: var(--accent-soft); color: var(--accent); }
+  .bdg.pan { background: var(--sunken); color: var(--muted); }
+  .bdg.today { background: var(--accent); color: var(--accent-ink); }
+  .pill { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; color: var(--pill-ink); white-space: nowrap; }
+  .pill.d { background: var(--f-d); } .pill.s { background: var(--f-s); } .pill.w { background: var(--f-w); }
+  .pill.o { background: var(--f-o); } .pill.p { background: var(--f-p); }
+  .tmp { font-size: 11px; font-weight: 700; color: var(--season); border: 1px solid var(--season); border-radius: 4px; padding: 0 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* Menú */
+  .prep { background: var(--olive-soft); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+  .prep-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .prep-day { font-family: var(--display); font-size: 18px; color: var(--olive-ink); }
+  .prep-t { font-size: 14px; font-weight: 700; color: var(--olive-ink); font-variant-numeric: tabular-nums; }
+  .prep .chip { background: var(--surface); border-color: transparent; }
+  .order { margin: 0; padding-left: 20px; font-size: 14.5px; display: flex; flex-direction: column; gap: 3px; }
+  .days { display: flex; flex-direction: column; gap: 10px; }
+  .day { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px 12px; }
+  .day.is-today { border-color: var(--accent); border-width: 2px; padding: 9px 13px 11px; }
+  .day-h { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .day-n { font-family: var(--display); font-size: 18px; }
+  .meal { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding-block: 6px; border-top: 1px solid var(--line); }
+  .meal:first-of-type { border-top: 0; }
+  .ml { font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 700; padding-top: 3px; }
+  .rec-link { background: none; border: 0; padding: 0; text-align: left; font-weight: 700; font-size: 16px; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .day-prep { margin-top: 8px; background: var(--olive-soft); border-radius: 10px; padding: 8px 10px; font-size: 14.5px; color: var(--olive-ink); display: flex; flex-direction: column; gap: 6px; }
+  .day-prep strong { font-weight: 700; }
+  .day-prep .chip { background: var(--surface); border-color: transparent; color: var(--ink); }
+
+  /* Recetas */
+  .list { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .rrow { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--line); padding: 12px 14px; }
+  .rrow:first-child { border-top: 0; }
+  .rn { font-weight: 700; font-size: 16px; }
+  .rm { grid-column: 1; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .rtags { grid-column: 1; display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .rarrow { grid-column: 2; grid-row: 1 / span 3; align-self: center; color: var(--muted); font-size: 20px; }
+
+  /* Detalle de receta */
+  .detail { position: fixed; inset: 0; z-index: 20; background: var(--bg); overflow-y: auto; padding-inline: 16px; padding-top: env(safe-area-inset-top, 0px); padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .d-in { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .d-bar { position: sticky; top: 0; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); margin-inline: -16px; padding-inline: 16px; z-index: 2; }
+  .back { background: none; border: 0; padding: 4px 0; font-weight: 700; color: var(--accent); font-size: 16px; }
+  .d-title { font-family: var(--display); font-weight: 400; font-size: 28px; line-height: 1.15; margin: 4px 0 0; text-wrap: balance; }
+  .meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .meta div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; }
+  .meta span { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 700; }
+  .meta b { font-size: 15px; font-variant-numeric: tabular-nums; }
+  .d-sec h3 { font-family: var(--display); font-weight: 400; font-size: 19px; margin: 0 0 6px; }
+  .ing { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .ing li { padding: 9px 12px; border-top: 1px solid var(--line); }
+  .ing li:first-child { border-top: 0; }
+  .steps { margin: 0; padding-left: 0; list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 10px; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 8px; }
+  .steps li::before { content: counter(s); font-family: var(--display); color: var(--accent); font-size: 18px; line-height: 1.3; }
+  .d-note { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 15px; }
+  .d-note b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 2px; }
+  .d-note.var { border-color: var(--season); }
+  .appears { margin: 0; padding-left: 18px; font-size: 15px; color: var(--muted); }
+
+  /* Compra */
+  .progress { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 14.5px; }
+  .bar { height: 6px; border-radius: 3px; background: var(--sunken); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--olive); border-radius: 3px; transition: width 0.2s; }
+  .grp h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 6px 0 6px; font-weight: 700; }
+  .grp.brk h3 { color: var(--accent); }
+  .item { display: grid; grid-template-columns: 28px 1fr auto; gap: 0 10px; align-items: start; padding: 10px 12px; border-top: 1px solid var(--line); cursor: pointer; }
+  .item:first-child { border-top: 0; }
+  .item input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--olive); }
+  .item .nm { font-weight: 700; }
+  .item .qt { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+  .item .for { grid-column: 2 / span 2; font-size: 13.5px; color: var(--muted); }
+  .item .tags { grid-column: 2 / span 2; display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
+  .item.done .nm, .item.done .qt { text-decoration: line-through; color: var(--muted); }
+  .hidden-note { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); padding: 8px 2px 0; }
+  .link { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .btn { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 11px 14px; font-weight: 700; width: 100%; }
+  .btn.armed { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+  /* Despensa */
+  .prow { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--line); }
+  .prow:first-child { border-top: 0; }
+  .prow .nm { font-weight: 700; }
+  .prow .use { grid-column: 1; font-size: 13.5px; color: var(--muted); }
+  .toggle { grid-column: 2; grid-row: 1 / span 2; display: flex; background: var(--sunken); border-radius: 9px; padding: 2px; gap: 2px; }
+  .toggle button { border: 0; background: transparent; padding: 7px 10px; border-radius: 7px; font-size: 14px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .toggle button[aria-pressed="true"].yes { background: var(--olive); color: var(--surface); }
+  .toggle button[aria-pressed="true"].no { background: var(--season); color: var(--surface); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  .stat b { font-family: var(--display); font-weight: 400; font-size: 26px; display: block; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13.5px; color: var(--muted); }
+
+  /* Guía */
+  .glance { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+  .glance h3 { font-family: var(--display); font-weight: 400; font-size: 19px; margin: 0 0 6px; }
+  .glance ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; }
+  .glance li { display: grid; grid-template-columns: 18px 1fr; gap: 6px; font-size: 15px; }
+  .glance li::before { content: ""; width: 12px; height: 12px; border: 1.6px solid var(--olive); border-radius: 3px; margin-top: 4px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); }
+  details.gsec { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  details.gsec > summary { list-style: none; cursor: pointer; padding: 13px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; }
+  details.gsec > summary::-webkit-details-marker { display: none; }
+  details.gsec > summary::after { content: "+"; font-family: var(--display); font-size: 22px; color: var(--muted); line-height: 1; }
+  details.gsec[open] > summary::after { content: "–"; }
+  .gcount { margin-left: auto; font-size: 13px; color: var(--muted); font-weight: 400; font-variant-numeric: tabular-nums; }
+  .gbody { padding: 0 14px 12px; display: flex; flex-direction: column; gap: 8px; }
+  .gnote { font-size: 14px; color: var(--muted); margin: 0; }
+  .glist { list-style: none; margin: 0; padding: 0; }
+  .glist li { padding: 9px 0; border-top: 1px solid var(--line); }
+  .gtop { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .gtop strong { margin-right: 2px; }
+  .gtop .pill { margin-left: auto; }
+  .glist p { margin: 3px 0 0; font-size: 14.5px; color: var(--muted); }
+  .glist .brand { color: var(--ink); font-size: 13.5px; }
+  .blist { margin: 0; padding-left: 18px; font-size: 15px; display: flex; flex-direction: column; gap: 4px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="top-in" id="top"></div></header>
+  <main>
+    <section class="view" id="v-menu" hidden></section>
+    <section class="view" id="v-recetas" hidden></section>
+    <section class="view" id="v-compra" hidden></section>
+    <section class="view" id="v-despensa" hidden></section>
+    <section class="view" id="v-guia" hidden></section>
+  </main>
+</div>
+
+<div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="d-title"></div>
+
+<nav class="tabs" aria-label="Secciones">
+  <div class="tabs-in">
+    <button data-tab="menu"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Menú</button>
+    <button data-tab="recetas"><svg viewBox="0 0 24 24"><path d="M5 4.5h10.5a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10.5M9 8.5h6"/></svg>Recetas</button>
+    <button data-tab="compra"><svg viewBox="0 0 24 24"><path d="M4 7h16l-1.5 12.5a1.5 1.5 0 0 1-1.5 1.3H7a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg>Compra</button>
+    <button data-tab="despensa"><svg viewBox="0 0 24 24"><path d="M7 3.5h10v3H7z"/><path d="M6.5 6.5h11a1 1 0 0 1 1 1V19a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V7.5a1 1 0 0 1 1-1z"/><path d="M5.5 11h13"/></svg>Despensa</button>
+    <button data-tab="guia"><svg viewBox="0 0 24 24"><path d="M19.5 4.5C11 4.5 5.5 8.5 5.5 15c0 2 .6 3.4 1.2 4.5"/><path d="M5.5 19.5c8.5 0 14-4 14-10.5V4.5"/><path d="M9 16c2.5-3 5.5-5 9-6.5"/></svg>Guía</button>
+  </div>
+</nav>
+
+<script>
+/* ============================================================
+   DATOS
+   ============================================================ */
+
+// Catálogo de productos. c = sección del súper, u = unidad para sumar,
+// p = básico de despensa (se oculta de la compra si lo tienes), x = aclaración de cantidad.
+const ITEMS = {
+  calabaza: { n: 'Calabaza', c: 'verdura', u: 'g' },
+  zanahoria: { n: 'Zanahorias', c: 'verdura', u: 'ud' },
+  puerro: { n: 'Puerros', c: 'verdura', u: 'ud' },
+  cebolla: { n: 'Cebollas', c: 'verdura', u: 'ud' },
+  pimiento_rojo: { n: 'Pimientos rojos', c: 'verdura', u: 'ud' },
+  pimiento_verde: { n: 'Pimientos verdes', c: 'verdura', u: 'ud' },
+  berenjena: { n: 'Berenjenas', c: 'verdura', u: 'ud' },
+  brocoli: { n: 'Brócoli', c: 'verdura', u: 'ud' },
+  espinacas: { n: 'Espinacas (frescas o congeladas)', c: 'verdura', u: 'g' },
+  setas: { n: 'Setas o champiñones', c: 'verdura', u: 'g' },
+  patata: { n: 'Patatas', c: 'verdura', u: 'g' },
+  boniato: { n: 'Boniato', c: 'verdura', u: 'g' },
+  tomate: { n: 'Tomates', c: 'verdura', u: 'ud' },
+  aguacate: { n: 'Aguacates', c: 'verdura', u: 'ud' },
+  limon: { n: 'Limones', c: 'verdura', u: 'ud' },
+  rucula: { n: 'Rúcula', c: 'verdura', u: 'g' },
+  fruta: { n: 'Fruta de temporada', c: 'verdura' },
+  platanos: { n: 'Plátanos', c: 'verdura' },
+
+  tofu: { n: 'Tofu firme', c: 'frescos', u: 'g' },
+  heura: { n: 'Heura picada', c: 'frescos', u: 'g' },
+  huevos: { n: 'Huevos', c: 'frescos', u: 'ud' },
+  mozzarella: { n: 'Mozzarella', c: 'frescos', u: 'g' },
+  feta: { n: 'Queso feta', c: 'frescos', u: 'g' },
+  queso_rallado: { n: 'Queso rallado', c: 'frescos', u: 'g' },
+  yogur: { n: 'Yogur natural o griego, sin azúcar', c: 'frescos', u: 'g' },
+  queso_batido: { n: 'Queso fresco batido natural', c: 'frescos', u: 'g' },
+  leche: { n: 'Leche', c: 'frescos', u: 'ml' },
+  bases_pizza: { n: 'Bases de pizza integrales', c: 'frescos', u: 'ud' },
+  skyr: { n: 'Skyr lácteo natural', c: 'frescos' },
+  skyr_alpro: { n: 'Alpro Estilo Skyr Natural', c: 'frescos' },
+
+  pan: { n: 'Pan 100 % integral', c: 'pan', u: 'reb' },
+
+  lentejas: { n: 'Lentejas pardinas', c: 'legumbres', u: 'g', p: 1 },
+  lenteja_roja: { n: 'Lenteja roja', c: 'legumbres', u: 'g', p: 1 },
+  garbanzos: { n: 'Garbanzos cocidos (bote)', c: 'legumbres', u: 'g', p: 1, x: 'escurridos' },
+  alubias_negras: { n: 'Alubias negras cocidas (bote)', c: 'legumbres', u: 'g', p: 1, x: 'escurridas' },
+  alubias_rojas: { n: 'Alubias rojas cocidas (bote)', c: 'legumbres', u: 'g', p: 1, x: 'escurridas' },
+  soja_text: { n: 'Soja texturizada fina', c: 'legumbres', u: 'g', p: 1 },
+  arroz: { n: 'Arroz integral', c: 'legumbres', u: 'g', p: 1 },
+  pasta_lenteja: { n: 'Pasta de lenteja roja', c: 'legumbres', u: 'g', p: 1 },
+  harina: { n: 'Harina integral', c: 'legumbres', u: 'g', p: 1 },
+  tortillas: { n: 'Tortillas integrales', c: 'legumbres', u: 'ud', p: 1 },
+
+  tomate_triturado: { n: 'Tomate triturado', c: 'conservas', u: 'g', p: 1 },
+  salsa_soja: { n: 'Salsa de soja', c: 'conservas', p: 1 },
+
+  aove: { n: 'Aceite de oliva virgen extra', c: 'basicos', p: 1 },
+  sal: { n: 'Sal yodada', c: 'basicos', p: 1 },
+  ajos: { n: 'Ajos', c: 'basicos', u: 'ud', p: 1, uw: 'dientes' },
+  pimenton: { n: 'Pimentón dulce', c: 'basicos', p: 1 },
+  pimenton_ahumado: { n: 'Pimentón ahumado', c: 'basicos', p: 1 },
+  comino: { n: 'Comino', c: 'basicos', p: 1 },
+  oregano: { n: 'Orégano', c: 'basicos', p: 1 },
+  laurel: { n: 'Laurel', c: 'basicos', p: 1 },
+  nuez_moscada: { n: 'Nuez moscada', c: 'basicos', p: 1 },
+  jengibre: { n: 'Jengibre en polvo', c: 'basicos', p: 1 },
+  chile: { n: 'Chile en polvo', c: 'basicos', p: 1 },
+  pimienta: { n: 'Pimienta negra', c: 'basicos', p: 1 },
+
+  avena: { n: 'Copos de avena integral', c: 'desayuno', p: 1 },
+  lino: { n: 'Semillas de lino', c: 'desayuno', p: 1 },
+  semillas_calabaza: { n: 'Semillas de calabaza', c: 'desayuno', p: 1 },
+  nueces: { n: 'Nueces', c: 'desayuno', p: 1 },
+  avellanas: { n: 'Avellanas', c: 'desayuno', p: 1 },
+  anacardos: { n: 'Anacardos', c: 'desayuno', p: 1 },
+  pistachos: { n: 'Pistachos', c: 'desayuno', p: 1 },
+  proteina: { n: 'Proteína vegetal en polvo', c: 'desayuno', p: 1 },
+  cacao: { n: 'Cacao puro en polvo', c: 'desayuno', p: 1 },
+  crema_cacahuete: { n: 'Crema de cacahuete 100 %', c: 'desayuno', p: 1 },
+  canela: { n: 'Canela', c: 'desayuno', p: 1 },
+  bebida_avena: { n: 'Bebida de avena', c: 'desayuno', p: 1 },
+  bebida_soja: { n: 'Bebida de soja sin azúcar', c: 'desayuno', p: 1 },
+  frutos_rojos: { n: 'Frutos rojos congelados', c: 'desayuno', p: 1 },
+  granola: { n: 'Granola baja en azúcar', c: 'desayuno', p: 1 },
+  levadura: { n: 'Levadura química', c: 'desayuno', p: 1 },
+  vainilla: { n: 'Vainilla', c: 'desayuno', p: 1 }
+};
+
+const SHOP_CATS = [
+  ['verdura', 'Fruta y verdura'],
+  ['frescos', 'Refrigerados'],
+  ['pan', 'Panadería'],
+  ['legumbres', 'Legumbres, cereales y pasta'],
+  ['conservas', 'Conservas y salsas'],
+  ['basicos', 'Especias y básicos']
+];
+const PANTRY_CATS = [
+  ['legumbres', 'Legumbres, cereales y pasta'],
+  ['conservas', 'Conservas y salsas'],
+  ['basicos', 'Especias y básicos'],
+  ['desayuno', 'Desayunos, meriendas y postres']
+];
+
+// Productos del bloque "Desayunos, meriendas y postres" de la compra.
+const BREAKFAST_KEYS = ['skyr_alpro', 'skyr', 'queso_batido', 'huevos', 'fruta', 'platanos', 'aguacate', 'tomate', 'pan',
+  'avena', 'lino', 'semillas_calabaza', 'nueces', 'avellanas', 'anacardos', 'pistachos', 'proteina', 'cacao',
+  'crema_cacahuete', 'canela', 'bebida_avena', 'bebida_soja', 'frutos_rojos', 'granola', 'tortillas', 'levadura', 'vainilla'];
+
+// Recetas de comida y cena. Cantidades para toda la receta (rac = raciones).
+// ing: [producto, cantidad, unidad, texto que se muestra]
+const R = {
+  lentejas: {
+    n: 'Lentejas estofadas con calabaza', rac: 4, batch: 1, t: '40 min', t2: '15 min en olla exprés', p: '~18 g',
+    ing: [
+      ['lentejas', 280, 'g', '280 g de lentejas pardinas'],
+      ['calabaza', 400, 'g', '400 g de calabaza'],
+      ['zanahoria', 2, 'ud', '2 zanahorias'],
+      ['puerro', 1, 'ud', '1 puerro'],
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['pimiento_rojo', 1, 'ud', '1 pimiento rojo'],
+      ['ajos', 2, 'ud', '2 dientes de ajo'],
+      ['tomate_triturado', 200, 'g', '200 g de tomate triturado'],
+      ['pimenton', null, null, '1 cdta de pimentón dulce'],
+      ['laurel', null, null, '2 hojas de laurel'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['sal', null, null, 'Sal yodada'],
+      ['limon', 1, 'ud', '1 limón, para servir']
+    ],
+    steps: [
+      'Pica la cebolla, el puerro, el pimiento, la zanahoria y el ajo. Sofríelos 8 min con el AOVE.',
+      'Añade el tomate triturado y el pimentón. Cocina 2 min.',
+      'Añade las lentejas lavadas, la calabaza en dados, el laurel y 1,2 l de agua.',
+      'Cuece 35 min a fuego medio-bajo, o 15 min en olla exprés. Sala al final.',
+      'Sirve con un chorrito de limón: su vitamina C ayuda a absorber el hierro.'
+    ],
+    keep: 'Nevera 3 días. Congelador 3 meses.'
+  },
+  crema: {
+    n: 'Crema de calabaza y lenteja roja', rac: 4, batch: 1, t: '30 min', p: '~20 g',
+    ing: [
+      ['calabaza', 800, 'g', '800 g de calabaza'],
+      ['zanahoria', 2, 'ud', '2 zanahorias'],
+      ['puerro', 1, 'ud', '1 puerro'],
+      ['lenteja_roja', 160, 'g', '160 g de lenteja roja'],
+      ['comino', null, null, '1 cdta de comino'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['sal', null, null, 'Sal yodada'],
+      ['pan', 4, 'reb', '4 rebanadas de pan integral, para servir'],
+      ['huevos', 4, 'ud', '4 huevos, para servir']
+    ],
+    steps: [
+      'Trocea la calabaza, la zanahoria y el puerro.',
+      'Sofríe el puerro 3 min con el AOVE.',
+      'Añade el resto de verduras, la lenteja roja lavada, el comino y 1 l de agua. Cuece 20 min.',
+      'Tritura hasta que quede fina. Prueba y ajusta la sal.',
+      'Al servir: una tostada integral con un huevo a la plancha por persona.'
+    ],
+    keep: 'Nevera 3 días. Congelador 3 meses (solo la crema, sin el huevo).'
+  },
+  berenjenas: {
+    n: 'Berenjenas rellenas de Heura', rac: 4, batch: 1, home: 1, t: '45 min', p: '~22 g',
+    ing: [
+      ['berenjena', 4, 'ud', '4 berenjenas'],
+      ['heura', 320, 'g', '320 g de Heura picada'],
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['ajos', 2, 'ud', '2 dientes de ajo'],
+      ['tomate_triturado', 400, 'g', '400 g de tomate triturado'],
+      ['mozzarella', 120, 'g', '120 g de mozzarella rallada'],
+      ['oregano', null, null, '1 cdta de orégano'],
+      ['aove', null, null, '3 cdas de AOVE'],
+      ['sal', null, null, 'Sal yodada']
+    ],
+    steps: [
+      'Enciende el horno a 200 °C. Corta las berenjenas por la mitad a lo largo y haz cortes en rejilla en la pulpa.',
+      'Riégalas con AOVE, sálalas y hornéalas 25 min.',
+      'Mientras, sofríe la cebolla y el ajo 5 min. Añade la Heura 5 min, y luego el tomate con el orégano 5 min más.',
+      'Vacía la pulpa con una cuchara, pícala y mézclala con el relleno.',
+      'Rellena las berenjenas, cúbrelas con la mozzarella y gratina 8 min.'
+    ],
+    keep: 'Nevera 3 días. Congelador 3 meses: congela el domingo las raciones del jueves.',
+    variant: 'Desde noviembre la berenjena sale de temporada. Usa 2 calabazas tipo cacahuete partidas por la mitad y hornéalas 40 min en lugar de 25.'
+  },
+  wok: {
+    n: 'Wok de tofu con brócoli', rac: 2, t: '15 min', t2: 'más el arroz', p: '~25 g',
+    ing: [
+      ['tofu', 300, 'g', '300 g de tofu firme'],
+      ['brocoli', 1, 'ud', '1 brócoli'],
+      ['pimiento_rojo', 1, 'ud', '1 pimiento rojo'],
+      ['zanahoria', 1, 'ud', '1 zanahoria'],
+      ['ajos', 1, 'ud', '1 diente de ajo'],
+      ['jengibre', null, null, '½ cdta de jengibre en polvo'],
+      ['salsa_soja', null, null, '3 cdas de salsa de soja'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['arroz', 150, 'g', '150 g de arroz integral (o el cocido en el batch)']
+    ],
+    steps: [
+      'Si no tienes arroz del batch, cuécelo según el paquete (unos 30 min).',
+      'Corta el tofu en dados y dóralo 6 min en el wok con el AOVE, a fuego fuerte. Resérvalo.',
+      'Saltea el brócoli en ramilletes y el pimiento y la zanahoria en tiras, 5 min.',
+      'Devuelve el tofu y añade el ajo picado, el jengibre y la salsa de soja. Remueve 1 min.',
+      'Sirve sobre el arroz.'
+    ],
+    keep: 'Mejor recién hecho. El arroz cocido aguanta 3 días en la nevera si lo enfrías rápido.'
+  },
+  revuelto: {
+    n: 'Revuelto de setas y espinacas', rac: 2, t: '10 min', p: '~23 g',
+    ing: [
+      ['setas', 300, 'g', '300 g de setas o champiñones'],
+      ['espinacas', 150, 'g', '150 g de espinacas frescas'],
+      ['huevos', 5, 'ud', '5 huevos'],
+      ['ajos', 1, 'ud', '1 diente de ajo'],
+      ['aove', null, null, '1 cda de AOVE'],
+      ['pimienta', null, null, 'Sal y pimienta'],
+      ['pan', 4, 'reb', '4 rebanadas de pan integral']
+    ],
+    steps: [
+      'Lamina las setas y el ajo.',
+      'Saltéalos 4 min con el AOVE a fuego fuerte.',
+      'Añade las espinacas y remueve 1 min, hasta que se ablanden.',
+      'Baja el fuego, añade los huevos batidos con sal y remueve hasta que cuajen.',
+      'Sirve con el pan integral tostado.'
+    ],
+    keep: 'Recién hecho.'
+  },
+  garbanzos: {
+    n: 'Garbanzos con espinacas', rac: 4, batch: 1, t: '20 min', p: '~22 g',
+    ing: [
+      ['garbanzos', 800, 'g', '800 g de garbanzos cocidos escurridos (2 botes grandes)'],
+      ['espinacas', 400, 'g', '400 g de espinacas (frescas o congeladas)'],
+      ['ajos', 3, 'ud', '3 dientes de ajo'],
+      ['pan', 1, 'reb', '1 rebanada de pan integral'],
+      ['comino', null, null, '1 cdta de comino'],
+      ['pimenton', null, null, '1 cdta de pimentón dulce'],
+      ['huevos', 4, 'ud', '4 huevos'],
+      ['aove', null, null, '3 cdas de AOVE'],
+      ['limon', 1, 'ud', '1 limón, para servir'],
+      ['sal', null, null, 'Sal yodada']
+    ],
+    steps: [
+      'Cuece los huevos 10 min, enfríalos y pélalos.',
+      'Dora el ajo laminado y la rebanada de pan en el AOVE. Sácalos y májalos con el comino, el pimentón y un poco de agua.',
+      'En la misma sartén, saltea las espinacas 3 min.',
+      'Añade los garbanzos lavados, el majado y un vaso de agua. Cocina 10 min a fuego suave.',
+      'Sirve con un huevo duro por persona y unas gotas de limón.'
+    ],
+    keep: 'Nevera 3 días, con los huevos aparte. Congelador 3 meses, sin el huevo.'
+  },
+  fajitas: {
+    n: 'Fajitas de tofu o Heura', rac: 2, home: 1, t: '20 min', p: '~30 g',
+    ing: [
+      ['tofu', 250, 'g', '250 g de tofu firme (o Heura)'],
+      ['pimiento_rojo', 1, 'ud', '1 pimiento rojo'],
+      ['pimiento_verde', 1, 'ud', '1 pimiento verde'],
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['alubias_negras', 250, 'g', '250 g de alubias negras cocidas (1 bote)'],
+      ['tortillas', 6, 'ud', '6 tortillas integrales'],
+      ['aguacate', 1, 'ud', '1 aguacate'],
+      ['limon', 1, 'ud', '1 limón'],
+      ['yogur', 125, 'g', '125 g de yogur griego natural'],
+      ['comino', null, null, '1 cdta de comino'],
+      ['pimenton_ahumado', null, null, '1 cdta de pimentón ahumado'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['sal', null, null, 'Sal yodada']
+    ],
+    steps: [
+      'Corta el tofu, los pimientos y la cebolla en tiras.',
+      'Dora el tofu 5 min con el AOVE, el comino y el pimentón. Resérvalo.',
+      'Saltea los pimientos y la cebolla 6 min.',
+      'Añade el tofu y las alubias escurridas y lavadas. Calienta 2 min.',
+      'Chafa el aguacate con limón y sal. Calienta las tortillas y sirve con el yogur en lugar de nata agria.'
+    ],
+    keep: 'El relleno aguanta 2 días en la nevera.'
+  },
+  bandeja: {
+    n: 'Bandeja de patata, zanahoria, brócoli y tofu', rac: 2, home: 1, t: '35 min', p: '~25 g',
+    ing: [
+      ['patata', 500, 'g', '500 g de patatas'],
+      ['zanahoria', 3, 'ud', '3 zanahorias'],
+      ['brocoli', 1, 'ud', '1 brócoli'],
+      ['tofu', 300, 'g', '300 g de tofu firme'],
+      ['pimenton', null, null, '1 cdta de pimentón'],
+      ['aove', null, null, '3 cdas de AOVE'],
+      ['yogur', 125, 'g', '125 g de yogur natural, para la salsa'],
+      ['limon', 0.5, 'ud', '½ limón, para la salsa'],
+      ['ajos', 1, 'ud', '1 diente de ajo, para la salsa'],
+      ['sal', null, null, 'Sal yodada']
+    ],
+    steps: [
+      'Enciende el horno a 200 °C, o la freidora de aire a 190 °C.',
+      'Corta la patata y la zanahoria en trozos. Mézclalas con 2 cdas de AOVE, el pimentón y sal, y hornéalas 20 min.',
+      'Añade el brócoli en ramilletes y el tofu en dados con el resto del AOVE. Hornea 15 min más.',
+      'Mientras, mezcla el yogur con el zumo de limón, el ajo rallado y sal.',
+      'Sirve la bandeja con la salsa por encima.'
+    ],
+    keep: 'Nevera 2 días.'
+  },
+  pizza: {
+    n: 'Pizza casera', rac: 2, home: 1, t: '25 min', p: '~30 g',
+    ing: [
+      ['bases_pizza', 2, 'ud', '2 bases de pizza integrales'],
+      ['tomate_triturado', 200, 'g', '200 g de tomate triturado'],
+      ['mozzarella', 250, 'g', '250 g de mozzarella'],
+      ['setas', 150, 'g', '150 g de champiñones'],
+      ['espinacas', 60, 'g', '60 g de espinacas frescas'],
+      ['huevos', 2, 'ud', '2 huevos'],
+      ['rucula', 50, 'g', '50 g de rúcula'],
+      ['oregano', null, null, 'Orégano'],
+      ['aove', null, null, '1 cda de AOVE']
+    ],
+    steps: [
+      'Enciende el horno a 220 °C.',
+      'Extiende el tomate sobre las bases y añade orégano.',
+      'Reparte la mozzarella, los champiñones laminados y las espinacas.',
+      'Hornea 10 min. Casca un huevo en el centro de cada pizza y hornea 4–5 min más.',
+      'Al sacarla, añade la rúcula y un hilo de AOVE.'
+    ],
+    keep: 'Mejor recién hecha.'
+  },
+  shakshuka: {
+    n: 'Shakshuka', rac: 2, t: '20 min', p: '~25 g',
+    ing: [
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['pimiento_rojo', 1, 'ud', '1 pimiento rojo'],
+      ['pimiento_verde', 1, 'ud', '1 pimiento verde'],
+      ['ajos', 2, 'ud', '2 dientes de ajo'],
+      ['tomate_triturado', 400, 'g', '400 g de tomate triturado'],
+      ['huevos', 4, 'ud', '4 huevos'],
+      ['feta', 80, 'g', '80 g de queso feta'],
+      ['comino', null, null, '1 cdta de comino'],
+      ['pimenton', null, null, '1 cdta de pimentón'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['pan', 4, 'reb', '4 rebanadas de pan integral']
+    ],
+    steps: [
+      'Pica la cebolla, los pimientos y el ajo. Sofríelos 8 min con el AOVE.',
+      'Añade el tomate, el comino y el pimentón. Cocina 5 min.',
+      'Haz 4 huecos en la salsa y casca un huevo en cada uno.',
+      'Tapa y cocina 6–8 min, hasta que la clara cuaje.',
+      'Desmenuza el feta por encima y sirve con el pan integral.'
+    ],
+    keep: 'Recién hecha. La salsa sola aguanta 3 días en la nevera.'
+  },
+  chili: {
+    n: 'Chili sin carne', rac: 4, batch: 1, t: '40 min', p: '~30 g',
+    ing: [
+      ['soja_text', 120, 'g', '120 g de soja texturizada fina'],
+      ['alubias_rojas', 500, 'g', '500 g de alubias rojas cocidas (2 botes)'],
+      ['boniato', 400, 'g', '400 g de boniato'],
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['pimiento_rojo', 1, 'ud', '1 pimiento rojo'],
+      ['ajos', 2, 'ud', '2 dientes de ajo'],
+      ['tomate_triturado', 400, 'g', '400 g de tomate triturado'],
+      ['comino', null, null, '2 cdtas de comino'],
+      ['pimenton_ahumado', null, null, '1 cdta de pimentón ahumado'],
+      ['chile', null, null, '½ cdta de chile en polvo (opcional)'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['sal', null, null, 'Sal yodada'],
+      ['arroz', 300, 'g', '300 g de arroz integral, para servir']
+    ],
+    steps: [
+      'Hidrata la soja texturizada 10 min en agua caliente y escúrrela bien.',
+      'Sofríe la cebolla, el pimiento y el ajo 6 min con el AOVE. Mientras, cuece el arroz.',
+      'Añade la soja y las especias, y dora 3 min.',
+      'Añade el tomate, el boniato en dados pequeños y 300 ml de agua. Cuece 20 min.',
+      'Añade las alubias lavadas y cuece 5 min más. Sirve con el arroz integral.'
+    ],
+    keep: 'Nevera 3 días. Congelador 3 meses.'
+  },
+  bechamel: {
+    n: 'Espinacas con bechamel y huevo', rac: 4, batch: 1, home: 1, t: '25 min', p: '~25 g',
+    ing: [
+      ['espinacas', 800, 'g', '800 g de espinacas (congeladas van perfectas)'],
+      ['huevos', 6, 'ud', '6 huevos'],
+      ['leche', 600, 'ml', '600 ml de leche'],
+      ['harina', 50, 'g', '50 g de harina integral'],
+      ['aove', null, null, '3 cdas de AOVE, en lugar de mantequilla'],
+      ['nuez_moscada', null, null, 'Nuez moscada'],
+      ['queso_rallado', 80, 'g', '80 g de queso rallado'],
+      ['sal', null, null, 'Sal yodada']
+    ],
+    steps: [
+      'Cuece los huevos 10 min, enfríalos, pélalos y pícalos.',
+      'Saltea las espinacas 5 min y escurre bien el agua que suelten.',
+      'Para la bechamel, calienta el AOVE, añade la harina y remueve 1 min. Añade la leche poco a poco, sin dejar de remover, hasta que espese (unos 6 min). Sala y añade nuez moscada.',
+      'Mezcla las espinacas, el huevo y la bechamel en una fuente.',
+      'Cubre con el queso y gratina 8 min a 220 °C.'
+    ],
+    keep: 'Nevera 3 días.'
+  },
+  bolonesa: {
+    n: 'Pasta de lentejas a la boloñesa', rac: 4, batch: 1, t: '25 min', p: '~30 g',
+    ing: [
+      ['pasta_lenteja', 320, 'g', '320 g de pasta de lenteja roja (80 g por persona y comida)'],
+      ['soja_text', 80, 'g', '80 g de soja texturizada fina'],
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['zanahoria', 2, 'ud', '2 zanahorias'],
+      ['ajos', 2, 'ud', '2 dientes de ajo'],
+      ['tomate_triturado', 800, 'g', '800 g de tomate triturado'],
+      ['oregano', null, null, '1 cdta de orégano'],
+      ['aove', null, null, '2 cdas de AOVE'],
+      ['queso_rallado', 40, 'g', '40 g de queso rallado'],
+      ['sal', null, null, 'Sal yodada']
+    ],
+    steps: [
+      'Hidrata la soja texturizada 10 min en agua caliente y escúrrela.',
+      'Sofríe la cebolla, la zanahoria rallada y el ajo 8 min con el AOVE.',
+      'Añade la soja y dora 3 min. Añade el tomate y el orégano y cuece 15 min.',
+      'El día de comer, cuece 160 g de pasta para los dos, unos 8 min, y mézclala con la mitad de la salsa.',
+      'Sirve con queso rallado por encima.'
+    ],
+    keep: 'La salsa: nevera 3 días y congelador 3 meses. Congela la mitad el domingo para el jueves. La pasta, siempre recién hecha.'
+  },
+  pastel: {
+    n: 'Pastel de verduras al horno', rac: 4, batch: 1, t: '35 min', p: '~23 g',
+    ing: [
+      ['huevos', 8, 'ud', '8 huevos'],
+      ['queso_batido', 200, 'g', '200 g de queso fresco batido'],
+      ['brocoli', 1, 'ud', '1 brócoli'],
+      ['espinacas', 150, 'g', '150 g de espinacas frescas'],
+      ['cebolla', 1, 'ud', '1 cebolla'],
+      ['queso_rallado', 60, 'g', '60 g de queso rallado'],
+      ['aove', null, null, '1 cda de AOVE'],
+      ['pimienta', null, null, 'Sal y pimienta'],
+      ['rucula', 100, 'g', '100 g de rúcula, para la ensalada'],
+      ['tomate', 2, 'ud', '2 tomates, para la ensalada']
+    ],
+    steps: [
+      'Enciende el horno a 180 °C.',
+      'Sofríe la cebolla 5 min y añade el brócoli en ramilletes pequeños, 3 min más.',
+      'Bate los huevos con el queso batido, sal y pimienta.',
+      'Mézclalo todo con las espinacas crudas en un molde engrasado y cubre con el queso rallado.',
+      'Hornea 25–30 min, hasta que el centro no tiemble. Sírvelo con ensalada de rúcula y tomate.'
+    ],
+    keep: 'Nevera 3 días. Se come frío o caliente.'
+  }
+};
+const MAIN_IDS = ['fajitas', 'pizza', 'bechamel', 'berenjenas', 'bandeja', 'lentejas', 'crema', 'garbanzos', 'chili', 'bolonesa', 'wok', 'revuelto', 'shakshuka', 'pastel'];
+
+// Desayunos, meriendas y postres (1 persona). Solo se muestran; no suman en la compra.
+const B = {
+  avena_noche: {
+    n: 'Avena de la noche anterior', t: '5 min', t2: 'más toda la noche', p: '~35 g',
+    ing: ['250 ml de bebida de avena', '50 g de copos de avena integral', '1 cda de cacao puro', '15 g de semillas de calabaza', '30 g de proteína vegetal en polvo', '1 cda de lino molido', 'Fruta al servir: plátano y frutos rojos congelados'],
+    steps: ['Mezcla todo menos la fruta en un tarro.', 'Ciérralo y déjalo toda la noche en la nevera.', 'Por la mañana, remueve y añade la fruta.'],
+    variants: [
+      ['Tarta de manzana', 'manzana rallada, canela y nueces.'],
+      ['Caqui y canela', 'caqui maduro chafado por encima (octubre a diciembre).'],
+      ['Pera y jengibre', 'pera troceada y una pizca de jengibre en polvo.'],
+      ['Chocolate y plátano', 'la base con cacao y plátano chafado dentro.']
+    ],
+    keep: 'Nevera hasta 2 días.'
+  },
+  tortitas: {
+    n: 'Tortitas de avena y plátano', t: '10 min', p: '~17 g',
+    ing: ['1 plátano maduro', '2 huevos', '40 g de avena'],
+    steps: ['Tritúralo todo.', 'Calienta una sartén antiadherente a fuego medio.', 'Echa la masa en círculos pequeños y cocina 2 min por cada lado.'],
+    tip: 'Con skyr por encima llegas a unos 30 g de proteína. Toppings de temporada: granada, caqui o pera.'
+  },
+  bol_skyr: {
+    n: 'Bol de skyr', t: '3 min', p: '~30 g',
+    ing: ['250 g de skyr lácteo natural', '30 g de avena o granola baja en azúcar', 'Fruta de temporada', 'Un puñado de nueces'],
+    steps: ['Pon el skyr en un bol.', 'Añade la avena, la fruta y las nueces.'],
+    tip: 'Con Alpro Estilo Skyr Natural baja a unos 20 g de proteína.'
+  },
+  revuelto_tofu: {
+    n: 'Revuelto de tofu', t: '10 min', p: '~27 g',
+    ing: ['150 g de tofu firme', 'Un puñado de espinacas', '½ cdta de cúrcuma', 'Sal, pimienta y 1 cda de AOVE', '2 rebanadas de pan integral'],
+    steps: ['Desmiga el tofu con un tenedor.', 'Saltéalo 5 min con el AOVE, la cúrcuma, sal y pimienta.', 'Añade las espinacas al final y remueve 1 min.', 'Sírvelo sobre el pan integral.']
+  },
+  tortilla: {
+    n: 'Tortilla francesa', t: '10 min', p: '~27 g',
+    ing: ['2 huevos', 'Un puñado de espinacas', '30 g de queso', '1 cdta de AOVE', '2 rebanadas de pan integral'],
+    steps: ['Saltea las espinacas 1 min.', 'Añade los huevos batidos y el queso.', 'Dobla la tortilla cuando cuaje.', 'Acompaña con el pan integral.']
+  },
+  batido: {
+    n: 'Batido completo', t: '5 min', p: '~20 g · 40 g con proteína',
+    ing: ['300 ml de bebida de soja', '1 plátano', '40 g de avena', '1 cda de cacao', '1 cda de crema de cacahuete 100 %', 'Opcional: 30 g de proteína en polvo'],
+    steps: ['Tritúralo todo 30 segundos.'],
+    tip: 'Para llevar: termo o botella isotérmica. Fuera de la nevera, máximo 2 horas. En la nevera, tómalo en 24 horas.'
+  },
+  manzana: {
+    n: 'Manzana o pera asada', t: '7 min', p: '~5–8 g',
+    ing: ['1 manzana o pera', 'Canela', '1 yogur natural', 'Unas nueces'],
+    steps: ['Córtala en trozos y espolvorea canela.', 'Tápala y métela 4–5 min en el microondas.', 'Sírvela con el yogur y las nueces.']
+  },
+  mugcake: {
+    n: 'Mug cake', t: '5 min', p: '~15–20 g',
+    ing: ['1 huevo', '30 g de avena molida', '15 g de proteína en polvo o 1 cda de cacao', '½ plátano chafado', '½ cdta de levadura química'],
+    steps: ['Mézclalo todo en una taza grande.', 'Microondas 90 segundos.'],
+    tip: 'Si queda crudo en el centro, 15 segundos más.'
+  },
+  torrija: {
+    n: 'Torrija proteica', t: '10 min', p: '~20 g',
+    ing: ['2 rebanadas de pan integral', '1 huevo', '100 ml de bebida de soja', 'Canela', 'Fruta de temporada'],
+    steps: ['Bate el huevo con la soja y la canela.', 'Moja el pan por los dos lados.', 'Dóralo en una sartén antiadherente 2 min por cada lado.', 'Sírvela con fruta.']
+  },
+  wrap: {
+    n: 'Wrap de desayuno', t: '10 min', p: '~25 g',
+    ing: ['1 tortilla integral grande', '2 huevos o 125 g de tofu', 'Un puñado de espinacas', '½ aguacate'],
+    steps: ['Haz un revuelto con los huevos o el tofu y las espinacas.', 'Ponlo en la tortilla con el aguacate.', 'Enróllala.'],
+    tip: 'Para llevar: envuelto en papel de aluminio, máximo 2 horas fuera de la nevera.'
+  },
+  vasito: {
+    n: 'Vasito de tarta de queso', t: '5 min', p: '~20 g',
+    ing: ['2 cdas de granola baja en azúcar', '200 g de skyr natural', 'Ralladura de limón', 'Unas gotas de vainilla', 'Fruta de temporada troceada'],
+    steps: ['Mezcla el skyr con el limón y la vainilla.', 'En un vaso, pon la granola, luego el skyr y la fruta por encima.'],
+    tip: 'Móntalo justo antes de comer para que la granola siga crujiente.'
+  }
+};
+const BRK_IDS = Object.keys(B);
+
+// Menú de dos semanas. b = sale del batch, f = viene congelado.
+const PLAN = [
+  {
+    batch: [
+      {
+        day: 'Domingo anterior', time: '≈ 2 h', recipes: ['lentejas', 'crema', 'berenjenas'],
+        order: [
+          'Mete las berenjenas en el horno (25 min).',
+          'Mientras, haz el sofrito de las lentejas y déjalas cociendo.',
+          'Cuece 150 g de arroz integral para el wok del martes.',
+          'Prepara la crema de calabaza y tritúrala.',
+          'Haz el relleno, rellena las berenjenas y gratínalas.',
+          'Reparte en táperes. Congela 2 raciones de berenjenas para el jueves.'
+        ]
+      },
+      {
+        day: 'Jueves', time: '≈ 30 min', recipes: ['garbanzos'],
+        order: ['Cuece los huevos.', 'Haz los garbanzos con espinacas.', 'Guarda los huevos pelados aparte.']
+      }
+    ],
+    days: [
+      { d: 'Lunes', c: { r: 'lentejas', b: 1 }, n: { r: 'crema', b: 1 } },
+      { d: 'Martes', c: { r: 'berenjenas', b: 1 }, n: { r: 'wok' } },
+      { d: 'Miércoles', c: { r: 'lentejas', b: 1 }, n: { r: 'crema', b: 1 } },
+      { d: 'Jueves', c: { r: 'berenjenas', b: 1, f: 1 }, n: { r: 'revuelto' }, prep: 1 },
+      { d: 'Viernes', c: { r: 'garbanzos', b: 1 }, n: { r: 'fajitas' } },
+      { d: 'Sábado', c: { r: 'bandeja' }, n: { r: 'pizza' } },
+      { d: 'Domingo', c: { r: 'garbanzos', b: 1 }, n: { r: 'shakshuka' }, next: 2 }
+    ]
+  },
+  {
+    batch: [
+      {
+        day: 'Domingo anterior', time: '≈ 2 h', recipes: ['chili', 'bechamel', 'bolonesa'],
+        order: [
+          'Hidrata a la vez la soja texturizada del chili y de la boloñesa (200 g).',
+          'Cuece los 6 huevos de las espinacas y 450 g de arroz integral (chili y wok del martes).',
+          'Haz el chili.',
+          'Mientras, haz la salsa boloñesa en otra olla.',
+          'Prepara las espinacas con bechamel y gratínalas.',
+          'Reparte en táperes. Congela la mitad de la boloñesa para el jueves.'
+        ]
+      },
+      {
+        day: 'Jueves', time: '≈ 1 h', recipes: ['pastel', 'lentejas'],
+        order: ['Mete el pastel de verduras en el horno.', 'Mientras, haz las lentejas estofadas.', 'Deja que se enfríe todo antes de guardarlo.']
+      }
+    ],
+    days: [
+      { d: 'Lunes', c: { r: 'chili', b: 1 }, n: { r: 'bechamel', b: 1 } },
+      { d: 'Martes', c: { r: 'bolonesa', b: 1 }, n: { r: 'wok' } },
+      { d: 'Miércoles', c: { r: 'chili', b: 1 }, n: { r: 'bechamel', b: 1 } },
+      { d: 'Jueves', c: { r: 'bolonesa', b: 1, f: 1 }, n: { r: 'pastel', b: 1 }, prep: 1 },
+      { d: 'Viernes', c: { r: 'lentejas', b: 1 }, n: { r: 'fajitas' } },
+      { d: 'Sábado', c: { r: 'bandeja' }, n: { r: 'pizza' } },
+      { d: 'Domingo', c: { r: 'lentejas', b: 1 }, n: { r: 'pastel', b: 1 }, next: 1 }
+    ]
+  }
+];
+
+// Guía de alimentos. Filas: [alimento, temporada, por qué, frecuencia, texto extra]
+// Frecuencia: d diario · s 3–5/semana · w 1–2/semana · o ocasional · p entreno
+const FREQ = { d: 'Diario', s: '3–5 / semana', w: '1–2 / semana', o: 'Ocasional', p: 'Entreno' };
+const GUIDE = [
+  { t: 'Verduras y hortalizas', note: 'Unas 5 raciones diarias de fruta y verdura se asocian a menor mortalidad cardiovascular y total. Varía colores: cada color aporta compuestos distintos.', rows: [
+    ['Brócoli', 1, 'Crucífera con sulforafano, vitamina C, K y folato. Una de las verduras más completas; mejor al vapor que hervido.', 's'],
+    ['Espinaca y acelga', 1, 'Hoja verde con folato, vitamina K y nitratos, que ayudan a bajar la tensión. Aportan hierro vegetal: acompáñalas de vitamina C.', 'd'],
+    ['Pimiento rojo', 0, 'Tiene más vitamina C que la naranja. Crudo conserva más. Útil para absorber el hierro de las legumbres.', 's'],
+    ['Coliflor, col, repollo, coles de Bruselas', 1, 'Crucíferas: glucosinolatos, fibra y vitamina C. Alterna entre ellas durante el invierno.', 's'],
+    ['Lombarda', 1, 'Crucífera con antocianinas, el pigmento morado antioxidante. Muy buena cruda en ensalada.', 'w'],
+    ['Kale o berza', 1, 'Crucífera y hoja verde a la vez. Su calcio se absorbe mejor que el de la espinaca.', 'w'],
+    ['Calabaza', 1, 'Betacaroteno, que el cuerpo convierte en vitamina A, necesaria para las mucosas y las defensas. Ideal en crema.', 's'],
+    ['Zanahoria', 0, 'Betacaroteno y fibra. Barata, dura semanas y sirve cruda para picar.', 'd'],
+    ['Tomate', 0, 'Licopeno, que se absorbe mejor cocinado con aceite. En invierno, el triturado en conserva vale igual.', 'd'],
+    ['Alcachofa', 1, 'Inulina, una fibra prebiótica que alimenta la flora intestinal. Temporada de noviembre a mayo.', 'w'],
+    ['Puerro, cebolla y ajo', 1, 'Fibra prebiótica y compuestos azufrados. El ajo baja un poco la tensión, pero no evita resfriados.', 'd'],
+    ['Setas y champiñones', 1, 'Fibra, vitaminas del grupo B y potasio. Dan sabor "carnoso" a guisos vegetarianos.', 's'],
+    ['Remolacha', 0, 'Muy rica en nitratos. Hay evidencia de una pequeña mejora del rendimiento deportivo.', 'w'],
+    ['Rúcula, canónigos, lechuga', 0, 'Base cruda de ensaladas. La rúcula y los canónigos también son ricos en nitratos.', 'd']
+  ]},
+  { t: 'Frutas', note: 'Mejor entera que en zumo: el zumo pierde la fibra. Otoño e invierno son la temporada de las frutas con más vitamina C.', rows: [
+    ['Naranja y mandarina', 1, 'Vitamina C y fibra. La vitamina C no evita resfriados, pero acorta un poco su duración.', 'd'],
+    ['Kiwi', 1, 'Una de las frutas con más vitamina C. Hay evidencia de que mejora el tránsito intestinal.', 'd'],
+    ['Manzana y pera', 1, 'Pectina, una fibra soluble. Fáciles de llevar al trabajo o al gimnasio.', 'd'],
+    ['Plátano', 0, 'Carbohidrato rápido y potasio. Perfecto antes o después de entrenar.', 'p'],
+    ['Frutos rojos (arándanos, frambuesas)', 0, 'Antocianinas, asociadas a salud cardiovascular. Fuera de temporada, congelados: mismo valor y más baratos.', 's'],
+    ['Granada', 1, 'Polifenoles antioxidantes. Temporada de octubre a diciembre.', 's'],
+    ['Caqui', 1, 'Betacaroteno, vitamina C y fibra. Temporada de octubre a diciembre.', 's'],
+    ['Higos frescos', 1, 'Fibra, calcio y potasio. Temporada corta: septiembre y octubre.', 'w'],
+    ['Uva', 1, 'Polifenoles. Es de las más azucaradas: mejor en ración pequeña.', 'w'],
+    ['Limón', 0, 'Vitamina C en aliños. Exprimido sobre legumbres o espinacas ayuda a absorber su hierro.', 'd'],
+    ['Dátiles', 0, 'Azúcar natural con fibra. Energía rápida antes de entrenar; muy calóricos para picar sin control.', 'p']
+  ]},
+  { t: 'Legumbres y proteína vegetal', note: 'Para un vegetariano que quiere ganar masa, las legumbres pasan a ser diarias. Combina fuentes distintas a lo largo del día para cubrir todos los aminoácidos.', rows: [
+    ['Lentejas (también la roja)', 0, 'Proteína, hierro, folato y fibra. La roja se cocina en 15 minutos y no hay que remojarla.', 's'],
+    ['Garbanzos', 0, 'Proteína y fibra. Base del hummus; tostados al horno son un buen snack.', 's'],
+    ['Tofu', 0, 'Proteína completa de soja. Si está cuajado con sulfato cálcico, también aporta mucho calcio.', 's'],
+    ['Tempeh', 0, 'Soja fermentada: proteína completa, más fibra y más fácil de digerir que el tofu.', 's'],
+    ['Alubias (blancas, rojas, negras)', 0, 'De las legumbres con más fibra. Aportan potasio y magnesio.', 'w'],
+    ['Edamame', 0, 'Soja verde con proteína completa. Snack o guarnición; se vende congelado.', 's'],
+    ['Seitán', 0, 'Proteína de trigo, de las más concentradas. Le falta lisina: combínalo con legumbres.', 'w'],
+    ['Guisantes y habas', 0, 'Proteína y fibra. Congelados, están disponibles todo el año.', 'w'],
+    ['Bebida de soja sin azúcar', 0, 'La única bebida vegetal con proteína parecida a la leche. Las de avena, arroz o almendra casi no tienen.', 'd'],
+    ['Altramuces', 0, 'Muy ricos en proteína y fibra. Enjuágalos para quitar sal.', 'w']
+  ]},
+  { t: 'Frutos secos y semillas', note: 'Un puñado diario (unos 30 g), naturales o tostados, sin sal ni freír. El ensayo PREDIMED mostró unos 30 % menos de eventos cardiovasculares con dieta mediterránea y frutos secos.', rows: [
+    ['Nueces', 1, 'El fruto seco con más omega-3 vegetal (ALA). Importante porque no comes pescado.', 'd'],
+    ['Lino molido', 0, 'La fuente más rica de omega-3 vegetal. Debe estar molido: entero pasa sin absorberse.', 'd'],
+    ['Almendras', 1, 'Vitamina E, calcio y magnesio.', 's'],
+    ['Pistachos', 0, 'Los frutos secos con más proteína y potasio.', 's'],
+    ['Semillas de calabaza', 0, 'Zinc, hierro y magnesio: justo los minerales que más cuestan en dieta vegetariana.', 's'],
+    ['Cacahuete o crema 100 %', 0, 'Botánicamente es una legumbre: mucha proteína y barato. Elige crema con un solo ingrediente.', 's'],
+    ['Avellanas', 1, 'Vitamina E y grasa monoinsaturada, como el aceite de oliva.', 'w'],
+    ['Sésamo y tahini', 0, 'Calcio y hierro. El tahini es la pasta de sésamo del hummus.', 'w'],
+    ['Anacardos', 0, 'Magnesio, zinc y hierro. Cremosos para salsas veganas.', 'w'],
+    ['Chía', 0, 'Omega-3 vegetal y fibra. Está bien, pero no es un superalimento.', 'w'],
+    ['Pipas de girasol', 0, 'Vitamina E. Mejor peladas y sin sal.', 'w'],
+    ['Nuez de Brasil', 0, 'Muy rica en selenio. Máximo 1–2 al día: el exceso de selenio es tóxico.', 'o']
+  ]},
+  { t: 'Cereales integrales y tubérculos', note: 'Tu fuente principal de energía para entrenar. Los días de entreno, sube la cantidad.', rows: [
+    ['Avena en copos', 0, 'Betaglucano, una fibra que baja el colesterol LDL. Desayuno rápido y barato.', 'd'],
+    ['Pan integral', 0, 'Fibra. En España, "integral" en la etiqueta obliga a harina 100 % integral; desconfía de "con harina integral".', 'd'],
+    ['Boniato', 1, 'Betacaroteno y carbohidrato de calidad para los días de entreno. Asado es una merienda estupenda.', 's'],
+    ['Arroz integral', 0, 'Fibra y magnesio frente al blanco.', 's'],
+    ['Patata', 0, 'Potasio y vitamina C. Cocida y enfriada forma almidón resistente, que actúa como fibra. Frita no.', 's'],
+    ['Pasta integral o de legumbre', 0, 'La de lenteja o garbanzo aporta unos 20 g de proteína por 100 g.', 's'],
+    ['Quinoa', 0, 'Proteína completa y sin gluten. Buena, aunque no mejor que las legumbres.', 'w'],
+    ['Trigo sarraceno, bulgur, mijo, cuscús integral', 0, 'Para variar texturas y sabores con el mismo beneficio de la fibra.', 'w'],
+    ['Castañas', 1, 'Carbohidrato con fibra y muy poca grasa. Asadas, son la merienda de otoño.', 'w']
+  ]},
+  { t: 'Huevos y lácteos', note: 'La mejor fuente de proteína de alta calidad, B12, calcio y yodo para un ovolactovegetariano. Elige siempre la versión natural, sin azúcar añadido.', rows: [
+    ['Huevos', 0, 'Proteína completa rica en leucina, además de B12, colina y vitamina D. Hasta uno al día no aumenta el riesgo cardiovascular.', 'd'],
+    ['Skyr y queso fresco batido', 0, 'Unos 10 g de proteína por 100 g, con poca grasa. Ideal en desayunos y meriendas.', 'd'],
+    ['Yogur natural o griego natural', 0, 'Los lácteos fermentados se asocian a menos diabetes tipo 2. Calcio y proteína.', 'd'],
+    ['Kéfir', 0, 'Fermentado con más variedad de bacterias que el yogur. Evidencia moderada.', 's'],
+    ['Requesón o queso cottage', 0, 'Rico en caseína, una proteína de digestión lenta. Buena opción antes de dormir.', 's'],
+    ['Leche', 0, 'Proteína, calcio, B12 y yodo. Base de batidos para ganar calorías.', 's'],
+    ['Queso fresco de Burgos y mozzarella', 0, 'Proteína y calcio con menos sal y grasa que los curados.', 's'],
+    ['Quesos curados', 0, 'Mucho calcio y proteína, pero también mucha sal y grasa saturada. En cantidades pequeñas.', 'o']
+  ]},
+  { t: 'Aceite, aliños y especias', note: '', rows: [
+    ['Aceite de oliva virgen extra', 0, 'La grasa principal, para cocinar y aliñar. Es el pilar del ensayo PREDIMED; unas 3–4 cucharadas al día.', 'd'],
+    ['Sal yodada', 0, 'El yodo es necesario para el tiroides. Cambia tu sal normal por yodada, sin usar más cantidad.', 'd'],
+    ['Hierbas (orégano, perejil, albahaca, comino)', 0, 'Dan sabor y permiten usar menos sal.', 'd'],
+    ['Jengibre', 0, 'Evidencia buena contra las náuseas. En infusión, reconfortante en invierno.', 's'],
+    ['Cúrcuma con pimienta negra', 0, 'Sabor y color. Su efecto antiinflamatorio solo se ha visto en suplementos, no en las cantidades de cocina.', 's'],
+    ['Canela (mejor de Ceilán)', 0, 'Endulza sin azúcar. La canela cassia tiene cumarina, que en exceso daña el hígado.', 's'],
+    ['Cacao puro en polvo', 0, 'Flavanoles, sin el azúcar del cacao soluble. En avena, yogur o batidos.', 's']
+  ]},
+  { t: 'Meriendas, snacks y extras', note: 'Una lista larga para elegir. Todas las opciones son saludables; las que llevan "Entreno" son buenas para antes o después de entrenar.', rows: [
+    ['Aguacate', 0, 'Grasa monoinsaturada, unos 7 g de fibra por 100 g y potasio. Medio aguacate es una ración.', 'd'],
+    ['Hummus', 0, 'Garbanzo, tahini y aceite: proteína, fibra y grasa buena. Casero, o de súper con aceite de oliva.', 'd'],
+    ['Skyr con frutos rojos y nueces', 0, 'Proteína, antioxidantes y omega-3 en un bol. Unos 25 g de proteína por ración.', 'd'],
+    ['Tostada integral con aguacate y huevo', 0, 'Merienda completa: proteína, fibra y grasa buena.', 's'],
+    ['Tostada integral con crema de cacahuete y plátano', 0, 'Carbohidrato y proteína. Energía para entrenar.', 'p'],
+    ['Porridge de avena', 0, 'Avena cocida con leche o soja, fruta y canela. Caliente y saciante en invierno.', 's'],
+    ['Overnight oats', 0, 'Avena remojada la noche anterior con yogur o leche. Desayuno listo sin cocinar.', 's'],
+    ['Batido casero', 0, 'Leche o soja, plátano, avena y crema de cacahuete. Forma fácil de sumar calorías y proteína para ganar masa.', 'p'],
+    ['Huevo cocido', 0, 'Snack de proteína que se lleva a cualquier sitio.', 's'],
+    ['Crudités con dip', 0, 'Zanahoria, pepino, apio y pimiento con hummus, guacamole o tzatziki. Verdura extra sin darte cuenta.', 's'],
+    ['Guacamole casero', 0, 'Aguacate, tomate, cebolla y lima. Mejor casero: los envasados suelen llevar poco aguacate.', 's'],
+    ['Tzatziki', 0, 'Yogur griego, pepino y ajo. Proteína y fermentado en una salsa.', 's'],
+    ['Baba ganoush', 0, 'Crema de berenjena asada con tahini. Alternativa al hummus.', 'w'],
+    ['Edamame con sal en escamas', 0, 'Proteína completa y fibra. Del congelador a la mesa en 5 minutos.', 's'],
+    ['Garbanzos tostados al horno', 0, 'Snack crujiente con proteína y fibra, alternativa a las patatas fritas.', 's'],
+    ['Manzana o pera con almendras', 0, 'Fibra más grasa buena: sacia mucho y se lleva en el bolsillo.', 'd'],
+    ['Tortitas de maíz o arroz integral', 0, 'Con hummus, queso fresco o crema de cacahuete. Base crujiente y ligera.', 's'],
+    ['Pan con tomate y aceite', 0, 'Pan integral, tomate rallado y aceite de oliva virgen extra. Clásico mediterráneo.', 's'],
+    ['Bocadillo integral de tofu o tempeh', 0, 'A la plancha con verduras. Merienda con mucha proteína.', 'w'],
+    ['Queso fresco con tomate y orégano', 0, 'Proteína y calcio con poca sal.', 's'],
+    ['Requesón con nueces y un hilo de miel', 0, 'Proteína lenta y omega-3. La miel, poca: sigue siendo azúcar.', 's'],
+    ['Kéfir con fruta', 0, 'Fermentado y fruta. Merienda bebible.', 's'],
+    ['Pudding de chía', 0, 'Chía reposada en bebida de soja con cacao o fruta. Fibra y omega-3.', 'w'],
+    ['Palomitas caseras', 0, 'Maíz en grano hecho con poco aceite: es un cereal integral. Las de microondas no.', 'w'],
+    ['Chocolate negro 85 % o más', 0, 'Flavanoles y poco azúcar. Dos onzas son una ración.', 's'],
+    ['Dátiles rellenos de crema de almendra', 0, 'Azúcar natural más grasa buena. Energía rápida antes de entrenar.', 'p'],
+    ['Fruta deshidratada (orejones, pasas, higos secos)', 0, 'Fruta entera concentrada, con su fibra. Ración pequeña: un puñado pequeño.', 'p'],
+    ['Boniato asado', 1, 'Carbohidrato de calidad y betacaroteno. Merienda caliente de invierno.', 'w'],
+    ['Castañas asadas', 1, 'Carbohidrato con fibra y casi sin grasa.', 'w'],
+    ['Crema de verduras casera', 1, 'Calabaza, puerro o zanahoria. Suma verdura, hidrata y reconforta en invierno.', 's'],
+    ['Sopa de miso', 0, 'Pasta de soja fermentada. Caliente en invierno; tiene bastante sal.', 'w'],
+    ['Aceitunas', 0, 'Grasa monoinsaturada, como el aceite. Tienen mucha sal: un puñado.', 'w'],
+    ['Levadura nutricional', 0, 'Copos con sabor a queso para pasta, cremas o palomitas. Vitaminas B; B12 solo si pone "enriquecida".', 's'],
+    ['Café', 0, 'Asociado a menor mortalidad con 3–4 tazas al día. La cafeína mejora el rendimiento en el gimnasio.', 'd'],
+    ['Té verde', 0, 'Catequinas antioxidantes. Tómalo lejos de las comidas: reduce la absorción del hierro.', 'd'],
+    ['Infusiones (jengibre, manzanilla, rooibos)', 0, 'Hidratan sin calorías y sientan bien en invierno.', 'd'],
+    ['Miel', 0, 'Buena evidencia para calmar la tos. Es azúcar: una cucharadita.', 'o'],
+    ['Batido de proteína (whey o soja)', 0, 'No es necesario, pero es cómodo si no llegas a la proteína del día. El whey es apto para ovolactovegetarianos.', 'p']
+  ]},
+  { t: 'Procesados que son casi como el alimento entero', note: '"Procesado" no significa malo: una lata de garbanzos está procesada y es excelente. El problema son los ultraprocesados, con muchos ingredientes industriales. Las recetas cambian: revisa siempre la etiqueta.', rule: [
+    'Pocos ingredientes, y todos los reconocerías en tu cocina.',
+    'Sin azúcar añadido: busca azúcar, jarabe, sirope o pasta de dátil en los ingredientes.',
+    'Azúcares por 100 g: menos de 10 g, a diario; 10–20 g, a menudo; más de 20 g, de vez en cuando.',
+    'En cereales, fibra de 6 g o más por 100 g. Sal de 0,3 g o menos por 100 g es poca.'
+  ], rows: [
+    ['Legumbres cocidas en bote', 0, 'Igual de nutritivas que las cocinadas en casa. Lávalas para quitar sal.', null, 'Luengo, Pedro Luis, Hacendado'],
+    ['Verdura congelada', 0, 'Mismo valor que la fresca, a veces más: se congela recién cogida.', null, 'Cualquiera'],
+    ['Fruta congelada', 0, 'Frutos rojos todo el año a mejor precio.', null, 'Cualquiera'],
+    ['Tofu y tempeh', 0, 'Proteína completa lista para usar.', null, 'Taifun, Hacendado'],
+    ['Skyr, queso fresco batido, yogur griego natural', 0, 'Proteína y fermentado. Solo la versión "natural", sin azúcar.', null, 'Cualquiera'],
+    ['Crema de cacahuete o almendra', 0, 'Solo si pone 100 %: un único ingrediente.', null, 'Hacendado 100 %, otras 100 %'],
+    ['Pasta de legumbre', 0, 'Unos 20 g de proteína por 100 g.', null, 'Felicia, Hacendado'],
+    ['Copos de avena', 0, 'Cereal integral de un solo ingrediente.', null, 'Cualquiera'],
+    ['Tortitas de maíz o arroz integral', 0, 'Pocos ingredientes. Mira que no lleven azúcar ni chocolate.', null, 'Cualquiera'],
+    ['Chocolate negro', 0, '85 % de cacao o más: poco azúcar.', null, 'Cualquiera'],
+    ['Bebida de soja', 0, 'Elige la que pone "sin azúcares añadidos". Mejor si está enriquecida en calcio.', null, 'Alpro, Hacendado'],
+    ['Tomate triturado o natural en conserva', 0, 'Licopeno disponible todo el año.', null, 'Cualquiera'],
+    ['Pan 100 % integral', 0, 'Busca "integral" o "100 % integral" en la etiqueta.', null, 'Cualquiera'],
+    ['Hummus envasado', 0, 'Mejor si lleva aceite de oliva en lugar de girasol.', null, 'Revisa la etiqueta'],
+    ['Levadura nutricional', 0, 'Mejor enriquecida en B12.', null, 'Revisa la etiqueta'],
+    ['Maíz para palomitas en grano', 0, 'Cereal integral. Evita las bolsas de microondas.', null, 'Cualquiera'],
+    ['Granola baja en azúcares (Hacendado)', 0, '4,7 g de azúcares por 100 g y 13,6 g de proteína. La OCU la destaca.', null, 'Hacendado'],
+    ['Granola sin azúcares añadidos (Jordans)', 0, '9,5 g de azúcares por 100 g, de las pasas. Mucha fibra, en parte de achicoria, que puede dar gases.', null, 'Jordans'],
+    ['Alpro Estilo Skyr Natural', 0, '2,5 g de azúcares y 5,8 g de proteína por 100 g. Enriquecido en calcio, B12 y vitamina D. Los de sabores llevan azúcar añadido.', null, 'Alpro']
+  ]},
+  { t: 'Nutrientes a vigilar por ser vegetariano', note: '', rows: [
+    ['Creatina monohidrato', 0, 'El suplemento deportivo con más evidencia. Viene sobre todo de la carne, así que los vegetarianos tienen menos reservas y suelen notar más efecto. No es un esteroide.', 'd', '3–5 g diarios'],
+    ['Vitamina B12', 0, 'Con huevos y lácteos puede bastar, pero muchos vegetarianos la tienen baja. Pide un análisis y suplementa si sale baja.', null, 'Según análisis'],
+    ['Hierro', 0, 'El vegetal se absorbe peor. Acompaña legumbres y hoja verde con vitamina C. Separa café y té de las comidas.', null, 'En cada comida'],
+    ['Omega-3 (EPA/DHA)', 0, 'Nueces, lino y chía aportan ALA, pero el cuerpo lo convierte poco. El aceite de algas es la opción vegetariana de EPA/DHA.', null, 'Algas: opcional'],
+    ['Vitamina D', 0, 'En invierno hay poco sol. Protege algo contra infecciones respiratorias si tienes déficit. Revísala en el análisis.', null, 'Según análisis'],
+    ['Yodo', 0, 'Sal yodada y lácteos.', 'd'],
+    ['Zinc', 0, 'Legumbres remojadas, semillas de calabaza, lácteos y frutos secos.', 'd'],
+    ['Calcio', 0, 'Lácteos, tofu cálcico, almendras, sésamo y kale. Con lácteos diarios estás cubierto.', 'd']
+  ]}
+];
+const GLANCE = [
+  '2–3 raciones de verdura, una en crudo', '2–3 piezas de fruta entera, una rica en vitamina C',
+  '1–2 raciones de legumbre o soja', 'Un puñado de frutos secos (unos 30 g)', '1 cucharada de lino molido o semillas',
+  'Aceite de oliva virgen extra como grasa principal', 'Cereal integral en lugar de refinado',
+  '2–3 lácteos o huevos repartidos en el día', 'Creatina, 3–5 g', 'Agua como bebida habitual'
+];
+const EXTRA_BOXES = [
+  { t: 'Fruta de temporada', items: [
+    '<b>Ya disponible:</b> plátano, manzana, pera y granada; uva e higo hasta octubre.',
+    '<b>Desde octubre:</b> caqui y mandarina.',
+    '<b>Desde noviembre:</b> naranja y kiwi.',
+    '<b>Todo el año:</b> frutos rojos congelados. Las fresas frescas vuelven en febrero.'
+  ]},
+  { t: 'Otoño-invierno y resfriados', items: [
+    'La vitamina C no evita resfriados, pero acorta un poco su duración.',
+    'El zinc en pastillas para chupar puede acortar el resfriado si empiezas en las primeras 24 h.',
+    'La miel calma la tos; nunca en menores de 1 año.',
+    'Probióticos y equinácea: evidencia débil.',
+    'Pesan más que cualquier alimento: dormir 7–9 h, lavarse las manos, hacer ejercicio y vacunarse de la gripe si toca.'
+  ]},
+  { t: 'A limitar', items: [
+    'Bebidas azucaradas y azúcar añadido.',
+    'Ultraprocesados: bollería, snacks, platos preparados.',
+    'Alcohol: no hay dosis saludable en cuanto a cáncer.',
+    'Exceso de sal y de quesos curados.',
+    '"Superalimentos" caros: no superan a lentejas, nueces o brócoli.'
+  ]}
+];
+
+/* ============================================================
+   ESTADO (se guarda en este móvil)
+   ============================================================ */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('rq.' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('rq.' + k, JSON.stringify(v)); } catch (e) { /* sin almacenamiento */ } }
+};
+const TABS = ['menu', 'recetas', 'compra', 'despensa', 'guia'];
+const hashTab = (location.hash || '').replace('#', '');
+const state = {
+  tab: TABS.includes(hashTab) ? hashTab : store.get('tab', 'menu'),
+  week: store.get('week', 1) === 2 ? 2 : 1,
+  recSeg: store.get('recSeg', 'main') === 'brk' ? 'brk' : 'main',
+  checks: store.get('checks', {}) || {},
+  pantry: store.get('pantry', {}) || {},
+  detail: null,
+  armed: false
+};
+if (!TABS.includes(state.tab)) state.tab = 'menu';
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const num = (x) => String(Math.round(x * 10) / 10).replace('.', ',');
+
+function fmtQty(key, e) {
+  if (!e || !e.has) return '';
+  const it = ITEMS[key];
+  const q = e.q;
+  let s = '';
+  if (it.u === 'g') s = q >= 1000 ? num(q / 1000) + ' kg' : Math.round(q) + ' g';
+  else if (it.u === 'ml') s = q >= 1000 ? num(q / 1000) + ' l' : Math.round(q) + ' ml';
+  else if (it.u === 'reb') s = Math.ceil(q) + ' rebanadas';
+  else if (it.u === 'ud') s = Math.ceil(q) + (it.uw ? ' ' + it.uw : '');
+  if (it.x) s += ' ' + it.x;
+  return s;
+}
+
+// Recetas que se cocinan en la semana: las del batch y las comidas que no salen del batch.
+function recipesCooked(w) {
+  const P = PLAN[w - 1];
+  const ids = [];
+  P.batch.forEach((s) => s.recipes.forEach((id) => ids.push(id)));
+  P.days.forEach((d) => ['c', 'n'].forEach((m) => { if (!d[m].b) ids.push(d[m].r); }));
+  return ids;
+}
+
+function aggregate(w) {
+  const m = {};
+  recipesCooked(w).forEach((id) => {
+    R[id].ing.forEach(([k, q]) => {
+      if (!ITEMS[k]) return;
+      const e = m[k] || (m[k] = { q: 0, has: false, rec: [] });
+      if (q != null) { e.q += q; e.has = true; }
+      if (!e.rec.includes(R[id].n)) e.rec.push(R[id].n);
+    });
+  });
+  return m;
+}
+
+function appearances(id) {
+  const out = [];
+  PLAN.forEach((P, wi) => {
+    P.batch.forEach((s) => { if (s.recipes.includes(id)) out.push(`Semana ${wi + 1} · se prepara el ${s.day.toLowerCase()}`); });
+    P.days.forEach((d) => {
+      if (d.c.r === id) out.push(`Semana ${wi + 1} · ${d.d.toLowerCase()} · comida`);
+      if (d.n.r === id) out.push(`Semana ${wi + 1} · ${d.d.toLowerCase()} · cena`);
+    });
+  });
+  return out;
+}
+
+const isHave = (k) => state.pantry[k] === 'tengo';
+const weekChecks = () => state.checks['w' + state.week] || (state.checks['w' + state.week] = {});
+
+/* ============================================================
+   PANTALLAS
+   ============================================================ */
+const TITLES = {
+  menu: ['Menú', 'Comidas y cenas para 2 · otoño'],
+  recetas: ['Recetas', ''],
+  compra: ['Lista de la compra', ''],
+  despensa: ['Despensa', 'Lo que tienes en casa'],
+  guia: ['Guía de alimentos', 'Vegetariano · ganar masa · otoño-invierno']
+};
+
+function weekSeg() {
+  return `<div class="seg" role="group" aria-label="Semana">
+    <button data-week="1" aria-pressed="${state.week === 1}">Semana 1</button>
+    <button data-week="2" aria-pressed="${state.week === 2}">Semana 2</button>
+  </div>`;
+}
+
+function renderTop() {
+  let [t, sub] = TITLES[state.tab];
+  if (state.tab === 'compra' || state.tab === 'menu') sub = (sub ? sub + ' · ' : '') + 'Semana ' + state.week;
+  if (state.tab === 'compra') sub = 'Semana ' + state.week + ' · para 2 personas';
+  if (state.tab === 'recetas') sub = MAIN_IDS.length + ' comidas y cenas · ' + BRK_IDS.length + ' desayunos, meriendas y postres';
+  $('#top').innerHTML = `<div class="eyebrow">Cuines Jan</div><h1>${esc(t)}</h1>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}`;
+}
+
+function mealRow(label, m) {
+  const r = R[m.r];
+  const b = (m.b ? '<span class="bdg batch">Del batch</span>' : '') + (m.f ? '<span class="bdg frz">Congelado: sácalo la noche antes</span>' : '');
+  return `<div class="meal"><span class="ml">${label}</span><div>
+    <button class="rec-link" data-rec="${m.r}">${esc(r.n)}</button>
+    ${b ? `<div class="badges">${b}</div>` : ''}
+  </div></div>`;
+}
+
+function renderMenu() {
+  const w = state.week, P = PLAN[w - 1];
+  const todayIdx = (new Date().getDay() + 6) % 7;
+  let h = weekSeg();
+  h += `<h2 class="h2">Preparación</h2><p class="lede">Haz la compra de la semana antes del domingo anterior.</p>`;
+  h += P.batch.map((s) => `<article class="prep">
+      <div class="prep-h"><span class="prep-day">${esc(s.day)}</span><span class="prep-t">${esc(s.time)}</span></div>
+      <div class="chips">${s.recipes.map((id) => `<button class="chip" data-rec="${id}">${esc(R[id].n)}</button>`).join('')}</div>
+      <ol class="order">${s.order.map((o) => `<li>${esc(o)}</li>`).join('')}</ol>
+    </article>`).join('');
+  h += `<h2 class="h2">Día a día</h2><div class="days">`;
+  h += P.days.map((d, i) => {
+    let extra = '';
+    if (d.prep) {
+      const s = P.batch[1];
+      extra = `<div class="day-prep"><strong>Hoy toca preparar (${esc(s.time)}):</strong><div class="chips">${s.recipes.map((id) => `<button class="chip" data-rec="${id}">${esc(R[id].n)}</button>`).join('')}</div></div>`;
+    }
+    if (d.next) {
+      const s = PLAN[d.next - 1].batch[0];
+      extra = `<div class="day-prep"><strong>Hoy toca preparar la semana ${d.next} (${esc(s.time)}):</strong><div class="chips">${s.recipes.map((id) => `<button class="chip" data-rec="${id}">${esc(R[id].n)}</button>`).join('')}</div><button class="link" data-week="${d.next}">Ver la semana ${d.next}</button></div>`;
+    }
+    const today = i === todayIdx;
+    return `<article class="day${today ? ' is-today' : ''}">
+      <div class="day-h"><span class="day-n">${esc(d.d)}</span>${today ? '<span class="bdg today">Hoy</span>' : ''}</div>
+      ${mealRow('Comida', d.c)}${mealRow('Cena', d.n)}${extra}
+    </article>`;
+  }).join('');
+  h += `</div>`;
+  $('#v-menu').innerHTML = h;
+}
+
+function renderRecetas() {
+  const seg = state.recSeg;
+  let h = `<div class="seg" role="group" aria-label="Tipo de receta">
+    <button data-seg="main" aria-pressed="${seg === 'main'}">Comidas y cenas</button>
+    <button data-seg="brk" aria-pressed="${seg === 'brk'}">Desayunos, meriendas y postres</button>
+  </div>`;
+  if (seg === 'main') {
+    h += `<p class="lede">Para 2 personas. Las de batch dan 4 raciones: dos comidas para los dos.</p>`;
+    h += `<div class="list">` + MAIN_IDS.map((id) => {
+      const r = R[id];
+      const tags = (r.home ? '<span class="bdg home">De casa</span>' : '') + (r.batch ? '<span class="bdg batch">Batch</span>' : '<span class="bdg pan">Rápida</span>');
+      return `<button class="rrow" data-rec="${id}"><span class="rn">${esc(r.n)}</span><span class="rarrow" aria-hidden="true">›</span>
+        <span class="rm">${esc(r.t)} · ${esc(r.p)} de proteína</span><span class="rtags">${tags}</span></button>`;
+    }).join('') + `</div>`;
+  } else {
+    h += `<p class="lede">Para 1 persona. Elige cuándo tomar cada una.</p>`;
+    h += `<div class="list">` + BRK_IDS.map((id) => {
+      const r = B[id];
+      return `<button class="rrow" data-rec="${id}"><span class="rn">${esc(r.n)}</span><span class="rarrow" aria-hidden="true">›</span>
+        <span class="rm">${esc(r.t)} · ${esc(r.p)} de proteína</span></button>`;
+    }).join('') + `</div>`;
+  }
+  $('#v-recetas').innerHTML = h;
+}
+
+function itemRow(k, qty, forText, tags) {
+  const ck = weekChecks();
+  const id = `ck-w${state.week}-${k}`;
+  const done = !!ck[k];
+  return `<label class="item${done ? ' done' : ''}" for="${id}">
+    <input type="checkbox" id="${id}" data-ck="${k}"${done ? ' checked' : ''}>
+    <span class="nm">${esc(ITEMS[k].n)}</span><span class="qt">${esc(qty)}</span>
+    ${forText ? `<span class="for">${esc(forText)}</span>` : ''}
+    ${tags ? `<span class="tags">${tags}</span>` : ''}
+  </label>`;
+}
+
+function renderCompra() {
+  const w = state.week, agg = aggregate(w), ck = weekChecks();
+  let hidden = 0, total = 0, done = 0;
+  const visible = (k) => !(ITEMS[k].p && isHave(k) && !ck[k]);
+  let groups = '';
+  SHOP_CATS.forEach(([c, label]) => {
+    const keys = Object.keys(ITEMS).filter((k) => ITEMS[k].c === c && agg[k]);
+    const rows = [];
+    keys.forEach((k) => {
+      if (!visible(k)) { hidden++; return; }
+      total++; if (ck[k]) done++;
+      let tags = ITEMS[k].p ? '<span class="bdg pan">Despensa</span>' : '';
+      if (BREAKFAST_KEYS.includes(k)) tags += '<span class="bdg home">También para desayunos</span>';
+      rows.push(itemRow(k, fmtQty(k, agg[k]), 'Para: ' + agg[k].rec.join(', '), tags));
+    });
+    if (rows.length) groups += `<div class="grp"><h3>${esc(label)}</h3><div class="list">${rows.join('')}</div></div>`;
+  });
+
+  const brkRows = [];
+  BREAKFAST_KEYS.forEach((k) => {
+    if (agg[k]) return; // ya está en la lista principal
+    if (!visible(k)) { hidden++; return; }
+    total++; if (ck[k]) done++;
+    brkRows.push(itemRow(k, '', '', ITEMS[k].p ? '<span class="bdg pan">Despensa</span>' : ''));
+  });
+  if (brkRows.length) groups += `<div class="grp brk"><h3>Desayunos, meriendas y postres</h3><div class="list">${brkRows.join('')}</div></div>`;
+
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  let h = weekSeg();
+  h += `<div><div class="progress"><span><b>${done}</b> de ${total} en el carro</span><span>${pct} %</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>`;
+  h += `<p class="note-box">Setas, espinacas frescas y rúcula aguantan 4–5 días. Si puedes, cómpralas el jueves.</p>`;
+  h += groups;
+  if (hidden) h += `<div class="hidden-note"><span>${hidden} básicos no aparecen porque ya los tienes.</span><button class="link" data-goto="despensa">Ver despensa</button></div>`;
+  h += `<button class="btn${state.armed ? ' armed' : ''}" data-reset>${state.armed ? 'Toca otra vez para vaciar el carro' : 'Empezar lista nueva'}</button>`;
+  $('#v-compra').innerHTML = h;
+}
+
+function renderDespensa() {
+  const agg = aggregate(state.week);
+  const keys = Object.keys(ITEMS).filter((k) => ITEMS[k].p);
+  const have = keys.filter(isHave).length;
+  let h = '';
+  if (!Object.keys(state.pantry).length) {
+    h += `<p class="note-box"><b>Primera vez:</b> todo empieza como "Se acabó", así que aparece en la compra. Marca "Tengo" en lo que ya tienes en casa.</p>`;
+  }
+  h += `<div class="stats"><div class="stat"><b>${have}</b><span>tienes en casa</span></div><div class="stat"><b>${keys.length - have}</b><span>se han acabado</span></div></div>`;
+  h += `<p class="lede">Lo que marques como "Se acabó" aparece en la lista de la compra. Al marcarlo como comprado, vuelve a "Tengo".</p>`;
+  PANTRY_CATS.forEach(([c, label]) => {
+    const ks = keys.filter((k) => ITEMS[k].c === c);
+    if (!ks.length) return;
+    h += `<div class="grp"><h3>${esc(label)}</h3><div class="list">` + ks.map((k) => {
+      const yes = isHave(k);
+      const q = agg[k] ? fmtQty(k, agg[k]) : '';
+      const use = agg[k] ? `Semana ${state.week}: ${q || 'lo usas'}` : '';
+      return `<div class="prow"><span class="nm">${esc(ITEMS[k].n)}</span>
+        <div class="toggle" role="group" aria-label="${esc(ITEMS[k].n)}">
+          <button class="yes" data-pan="${k}" data-v="tengo" aria-pressed="${yes}">Tengo</button>
+          <button class="no" data-pan="${k}" data-v="falta" aria-pressed="${!yes}">Se acabó</button>
+        </div>
+        ${use ? `<span class="use">${esc(use)}</span>` : ''}</div>`;
+    }).join('') + `</div></div>`;
+  });
+  $('#v-despensa').innerHTML = h;
+}
+
+function renderGuia() {
+  let h = `<div class="glance"><h3>Tu día en una mirada</h3><ul>${GLANCE.map((g) => `<li>${esc(g)}</li>`).join('')}</ul></div>`;
+  h += `<div class="legend">${Object.entries(FREQ).map(([k, v]) => `<span class="pill ${k}">${v}</span>`).join('')}<span class="tmp">Temporada</span></div>`;
+  GUIDE.forEach((s, i) => {
+    const rows = s.rows.map(([name, season, why, f, extra]) => {
+      const pill = f ? `<span class="pill ${f}">${esc(f === 'd' && extra ? extra : FREQ[f])}</span>` : (extra && !s.rule ? `<span class="bdg pan" style="margin-left:auto">${esc(extra)}</span>` : '');
+      const brand = s.rule && extra ? `<p class="brand">Marcas: ${esc(extra)}</p>` : '';
+      return `<li><div class="gtop"><strong>${esc(name)}</strong>${season ? '<span class="tmp">Temporada</span>' : ''}${pill}</div><p>${esc(why)}</p>${brand}</li>`;
+    }).join('');
+    const rule = s.rule ? `<div class="note-box"><b>Cómo juzgar un producto en 10 segundos</b><ol class="blist">${s.rule.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>` : '';
+    h += `<details class="gsec" id="g-${i}"><summary>${esc(s.t)}<span class="gcount">${s.rows.length}</span></summary>
+      <div class="gbody">${s.note ? `<p class="gnote">${esc(s.note)}</p>` : ''}${rule}<ul class="glist">${rows}</ul></div></details>`;
+  });
+  EXTRA_BOXES.forEach((b, i) => {
+    h += `<details class="gsec" id="gx-${i}"><summary>${esc(b.t)}</summary><div class="gbody"><ul class="blist">${b.items.map((x) => `<li>${x}</li>`).join('')}</ul></div></details>`;
+  });
+  h += `<p class="lede">Información general basada en evidencia científica (PREDIMED, revisiones Cochrane, OMS, AESAN, IARC). No sustituye el consejo de un médico o dietista-nutricionista.</p>`;
+  $('#v-guia').innerHTML = h;
+}
+
+function renderDetail() {
+  const id = state.detail;
+  const main = !!R[id];
+  const r = main ? R[id] : B[id];
+  const ing = main ? r.ing.map((x) => x[3]) : r.ing;
+  const rac = main ? (r.batch ? '4 · dos comidas' : '2 personas') : '1 persona';
+  let h = `<div class="d-in">
+    <div class="d-bar"><button class="back" data-back>‹ Volver</button></div>
+    <div><h2 class="d-title" id="d-title">${esc(r.n)}</h2>
+      ${main ? `<div class="badges" style="margin-top:8px">${r.home ? '<span class="bdg home">De casa</span>' : ''}${r.batch ? '<span class="bdg batch">Batch</span>' : '<span class="bdg pan">Rápida</span>'}</div>` : ''}
+    </div>
+    <div class="meta">
+      <div><span>Tiempo</span><b>${esc(r.t)}</b>${r.t2 ? `<div style="font-size:12.5px;color:var(--muted)">${esc(r.t2)}</div>` : ''}</div>
+      <div><span>Raciones</span><b>${esc(rac)}</b></div>
+      <div><span>Proteína</span><b>${esc(r.p)}</b><div style="font-size:12.5px;color:var(--muted)">por ración</div></div>
+    </div>
+    <div class="d-sec"><h3>Ingredientes</h3><ul class="ing">${ing.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
+    <div class="d-sec"><h3>Pasos</h3><ol class="steps">${r.steps.map((x) => `<li><span>${esc(x)}</span></li>`).join('')}</ol></div>`;
+  if (r.variants) h += `<div class="d-sec"><h3>Variantes: cambia la fruta</h3><ul class="ing">${r.variants.map(([a, b]) => `<li><b>${esc(a)}:</b> ${esc(b)}</li>`).join('')}</ul></div>`;
+  if (r.keep) h += `<div class="d-note"><b>Conservación</b>${esc(r.keep)}</div>`;
+  if (r.tip) h += `<div class="d-note"><b>Consejo</b>${esc(r.tip)}</div>`;
+  if (r.variant) h += `<div class="d-note var"><b>Temporada</b>${esc(r.variant)}</div>`;
+  if (main) {
+    const ap = appearances(id);
+    if (ap.length) h += `<div class="d-sec"><h3>En el menú</h3><ul class="appears">${ap.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+  }
+  h += `</div>`;
+  $('#detail').innerHTML = h;
+}
+
+function render() {
+  TABS.forEach((t) => { $('#v-' + t).hidden = t !== state.tab; });
+  document.querySelectorAll('[data-tab]').forEach((b) => {
+    if (b.dataset.tab === state.tab) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+  });
+  renderTop();
+  ({ menu: renderMenu, recetas: renderRecetas, compra: renderCompra, despensa: renderDespensa, guia: renderGuia })[state.tab]();
+}
+
+/* ============================================================
+   ACCIONES
+   ============================================================ */
+function setTab(t) {
+  state.tab = t; state.armed = false; store.set('tab', t);
+  try { history.replaceState(null, '', '#' + t); } catch (e) { /* sin historial */ }
+  render(); window.scrollTo(0, 0);
+}
+function openDetail(id) {
+  state.detail = id; renderDetail();
+  const d = $('#detail'); d.hidden = false; d.scrollTop = 0;
+  document.body.classList.add('lock');
+  const b = $('.back', d); if (b) b.focus();
+}
+function closeDetail() {
+  $('#detail').hidden = true; document.body.classList.remove('lock'); state.detail = null;
+}
+
+document.addEventListener('click', (ev) => {
+  const t = ev.target.closest('button');
+  if (!t) return;
+  if (t.dataset.tab) return setTab(t.dataset.tab);
+  if (t.dataset.goto) return setTab(t.dataset.goto);
+  if (t.dataset.week) { state.week = Number(t.dataset.week); state.armed = false; store.set('week', state.week); render(); if (state.tab === 'menu') window.scrollTo(0, 0); return; }
+  if (t.dataset.seg) { state.recSeg = t.dataset.seg; store.set('recSeg', state.recSeg); render(); return; }
+  if (t.dataset.rec) return openDetail(t.dataset.rec);
+  if (t.hasAttribute('data-back')) return closeDetail();
+  if (t.dataset.pan) { state.pantry[t.dataset.pan] = t.dataset.v; store.set('pantry', state.pantry); render(); return; }
+  if (t.hasAttribute('data-reset')) {
+    if (!state.armed) {
+      state.armed = true; render();
+      setTimeout(() => { if (state.armed) { state.armed = false; if (state.tab === 'compra') render(); } }, 4000);
+    } else {
+      state.checks['w' + state.week] = {}; store.set('checks', state.checks); state.armed = false; render();
+    }
+  }
+});
+
+document.addEventListener('change', (ev) => {
+  const el = ev.target;
+  if (!el.matches('[data-ck]')) return;
+  const k = el.dataset.ck, ck = weekChecks();
+  if (el.checked) { ck[k] = true; if (ITEMS[k].p) state.pantry[k] = 'tengo'; }
+  else { delete ck[k]; if (ITEMS[k].p) state.pantry[k] = 'falta'; }
+  store.set('checks', state.checks); store.set('pantry', state.pantry);
+  const row = el.closest('.item'); if (row) row.classList.toggle('done', el.checked);
+  // Actualiza el progreso sin redibujar la lista.
+  const boxes = document.querySelectorAll('#v-compra [data-ck]');
+  const done = [...boxes].filter((b) => b.checked).length;
+  const pct = boxes.length ? Math.round((done / boxes.length) * 100) : 0;
+  const p = $('#v-compra .progress');
+  if (p) { p.innerHTML = `<span><b>${done}</b> de ${boxes.length} en el carro</span><span>${pct} %</span>`; $('#v-compra .bar i').style.width = pct + '%'; }
+});
+
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && state.detail) closeDetail(); });
+
+render();
+</script>
+</body>
+</html>
