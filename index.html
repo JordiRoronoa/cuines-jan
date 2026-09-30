@@ -287,10 +287,10 @@ const ITEMS = {
   limon: { n: 'Limones', c: 'verdura', u: 'ud' },
   rucula: { n: 'Rúcula', c: 'verdura', u: 'g' },
   fruta: { n: 'Fruta de temporada', c: 'verdura' },
-  platanos: { n: 'Plátanos', c: 'verdura' },
-  manzanas: { n: 'Manzanas', c: 'verdura' },
-  citricos: { n: 'Mandarinas o naranjas', c: 'verdura' },
-  caquis: { n: 'Caquis', c: 'verdura' },
+  platanos: { n: 'Plátanos', c: 'verdura', u: 'ud' },
+  manzanas: { n: 'Manzanas', c: 'verdura', u: 'ud' },
+  citricos: { n: 'Mandarinas o naranjas', c: 'verdura', u: 'ud' },
+  caquis: { n: 'Caquis', c: 'verdura', u: 'ud' },
 
   tofu: { n: 'Tofu firme', c: 'frescos', u: 'g' },
   heura: { n: 'Heura picada', c: 'frescos', u: 'g' },
@@ -302,9 +302,9 @@ const ITEMS = {
   queso_batido: { n: 'Queso fresco batido natural', c: 'frescos', u: 'g' },
   leche: { n: 'Leche', c: 'frescos', u: 'ml' },
   bases_pizza: { n: 'Bases de pizza integrales', c: 'frescos', u: 'ud' },
-  skyr: { n: 'Skyr lácteo natural', c: 'frescos' },
+  skyr: { n: 'Skyr lácteo natural', c: 'frescos', u: 'g' },
   skyr_alpro: { n: 'Alpro Estilo Skyr Natural', c: 'frescos' },
-  hummus: { n: 'Hummus', c: 'frescos' },
+  hummus: { n: 'Hummus', c: 'frescos', u: 'g' },
 
   pan: { n: 'Pan 100 % integral', c: 'pan', u: 'reb' },
 
@@ -336,23 +336,25 @@ const ITEMS = {
   curry: { n: 'Curry en polvo', c: 'basicos', p: 1 },
   pimienta: { n: 'Pimienta negra', c: 'basicos', p: 1 },
 
-  avena: { n: 'Copos de avena integral', c: 'desayuno', p: 1 },
-  lino: { n: 'Semillas de lino', c: 'desayuno', p: 1 },
-  semillas_calabaza: { n: 'Semillas de calabaza', c: 'desayuno', p: 1 },
+  avena: { n: 'Copos de avena integral', c: 'desayuno', u: 'g', p: 1 },
+  lino: { n: 'Semillas de lino', c: 'desayuno', u: 'g', p: 1 },
+  semillas_calabaza: { n: 'Semillas de calabaza', c: 'desayuno', u: 'g', p: 1 },
   nueces: { n: 'Nueces', c: 'desayuno', u: 'g', p: 1 },
-  avellanas: { n: 'Avellanas', c: 'desayuno', p: 1 },
-  anacardos: { n: 'Anacardos', c: 'desayuno', p: 1 },
-  pistachos: { n: 'Pistachos', c: 'desayuno', p: 1 },
-  proteina: { n: 'Proteína vegetal en polvo', c: 'desayuno', p: 1 },
+  avellanas: { n: 'Avellanas', c: 'desayuno', u: 'g', p: 1 },
+  anacardos: { n: 'Anacardos', c: 'desayuno', u: 'g', p: 1 },
+  pistachos: { n: 'Pistachos', c: 'desayuno', u: 'g', p: 1 },
+  proteina: { n: 'Proteína vegetal en polvo', c: 'desayuno', u: 'g', p: 1 },
   cacao: { n: 'Cacao puro en polvo', c: 'desayuno', p: 1 },
-  crema_cacahuete: { n: 'Crema de cacahuete 100 %', c: 'desayuno', p: 1 },
+  crema_cacahuete: { n: 'Crema de cacahuete 100 %', c: 'desayuno', u: 'g', p: 1 },
   canela: { n: 'Canela', c: 'desayuno', p: 1 },
-  bebida_avena: { n: 'Bebida de avena', c: 'desayuno', p: 1 },
-  bebida_soja: { n: 'Bebida de soja sin azúcar', c: 'desayuno', p: 1 },
+  bebida_avena: { n: 'Bebida de avena', c: 'desayuno', u: 'ml', p: 1 },
+  bebida_soja: { n: 'Bebida de soja sin azúcar', c: 'desayuno', u: 'ml', p: 1 },
   frutos_rojos: { n: 'Frutos rojos congelados', c: 'desayuno', p: 1 },
-  granola: { n: 'Granola baja en azúcar', c: 'desayuno', p: 1 },
+  granola: { n: 'Granola baja en azúcar', c: 'desayuno', u: 'g', p: 1 },
   levadura: { n: 'Levadura química', c: 'desayuno', p: 1 },
-  vainilla: { n: 'Vainilla', c: 'desayuno', p: 1 }
+  vainilla: { n: 'Vainilla', c: 'desayuno', p: 1 },
+  creatina: { n: 'Creatina monohidrato', c: 'desayuno', u: 'g', p: 1 },
+  b12: { n: 'Vitamina B12 1000 µg', c: 'desayuno', u: 'ud', uw: 'pastillas', p: 1 }
 };
 
 const SHOP_CATS = [
@@ -373,7 +375,7 @@ const PANTRY_CATS = [
 // Productos del bloque "Desayunos, meriendas y postres" de la compra.
 const BREAKFAST_KEYS = ['skyr_alpro', 'skyr', 'queso_batido', 'hummus', 'huevos', 'platanos', 'manzanas', 'citricos', 'caquis', 'aguacate', 'tomate', 'pan',
   'avena', 'lino', 'semillas_calabaza', 'nueces', 'avellanas', 'anacardos', 'pistachos', 'proteina', 'cacao',
-  'crema_cacahuete', 'canela', 'bebida_avena', 'bebida_soja', 'frutos_rojos', 'granola', 'tortillas', 'levadura', 'vainilla'];
+  'crema_cacahuete', 'canela', 'bebida_avena', 'bebida_soja', 'frutos_rojos', 'granola', 'tortillas', 'levadura', 'vainilla', 'creatina', 'b12'];
 
 // Recetas de comida y cena. Cantidades para toda la receta (rac = raciones).
 // ing: [producto, cantidad, unidad, texto que se muestra]
@@ -778,6 +780,7 @@ const B = {
   avena_noche: {
     n: 'Avena de la noche anterior', t: '5 min', t2: 'más toda la noche', p: '~35 g',
     ing: ['250 ml de bebida de avena', '50 g de copos de avena integral', '1 cda de cacao puro', '15 g de semillas de calabaza', '30 g de proteína vegetal en polvo', '1 cda de lino molido', 'Fruta al servir: plátano y frutos rojos congelados'],
+    buy: [['bebida_avena', 250], ['avena', 50], ['semillas_calabaza', 15], ['proteina', 30], ['lino', 10]],
     steps: ['Mezcla todo menos la fruta en un tarro.', 'Ciérralo y déjalo toda la noche en la nevera.', 'Por la mañana, remueve y añade la fruta.'],
     variants: [
       ['Tarta de manzana', 'manzana rallada, canela y nueces.'],
@@ -790,17 +793,20 @@ const B = {
   tostada_aguacate: {
     n: 'Tostadas de aguacate y huevo', t: '10 min', p: '~20 g',
     ing: ['2 rebanadas de pan 100 % integral', '½ aguacate', '2 huevos', '1 tomate', 'Un hilo de AOVE, sal y pimienta'],
+    buy: [['pan', 2], ['aguacate', 0.5], ['huevos', 2], ['tomate', 1]],
     steps: ['Tuesta el pan.', 'Haz los huevos a la plancha o revueltos, 3 min.', 'Chafa el aguacate sobre el pan con sal y un hilo de AOVE.', 'Pon encima el tomate en rodajas y los huevos.']
   },
   tostada_hummus: {
     n: 'Tostadas de hummus y huevo', t: '12 min', p: '~20 g',
     ing: ['2 rebanadas de pan 100 % integral', '3 cdas de hummus', '1 huevo', '1 tomate', '1 cda de semillas de calabaza'],
+    buy: [['pan', 2], ['hummus', 45], ['huevos', 1], ['tomate', 1], ['semillas_calabaza', 10]],
     steps: ['Cuece el huevo 10 min, o usa uno cocido de la nevera.', 'Tuesta el pan y úntalo con el hummus.', 'Pon encima el tomate en rodajas y el huevo en láminas.', 'Termina con las semillas de calabaza.'],
     tip: 'El hummus solo aporta poca proteína. El huevo sube la tostada a unos 20 g.'
   },
   tortitas: {
     n: 'Tortitas de avena y plátano', t: '10 min', p: '~17 g',
     ing: ['1 plátano maduro', '2 huevos', '40 g de avena'],
+    buy: [['platanos', 1], ['huevos', 2], ['avena', 40]],
     steps: ['Tritúralo todo.', 'Calienta una sartén antiadherente a fuego medio.', 'Echa la masa en círculos pequeños y cocina 2 min por cada lado.'],
     tip: 'Con skyr por encima llegas a unos 30 g de proteína. Toppings de temporada: granada, caqui o pera.'
   },
@@ -822,7 +828,8 @@ const B = {
   },
   batido: {
     n: 'Batido completo', t: '5 min', p: '~20 g · 40 g con proteína',
-    ing: ['300 ml de bebida de soja', '1 plátano', '40 g de avena', '1 cda de cacao', '1 cda de crema de cacahuete 100 %', 'Opcional: 30 g de proteína en polvo'],
+    ing: ['300 ml de bebida de soja', '1 plátano', '40 g de avena', '1 cda de cacao', '1 cda de crema de cacahuete 100 %', '1 cda de lino molido', '30 g de proteína en polvo (opcional)'],
+    buy: [['bebida_soja', 300], ['platanos', 1], ['avena', 40], ['crema_cacahuete', 15], ['lino', 10], ['proteina', 30]],
     steps: ['Tritúralo todo 30 segundos.'],
     tip: 'Para llevar: termo o botella isotérmica. Fuera de la nevera, máximo 2 horas. En la nevera, tómalo en 24 horas.'
   },
@@ -845,12 +852,14 @@ const B = {
   wrap: {
     n: 'Wrap de desayuno', t: '10 min', p: '~25 g',
     ing: ['1 tortilla integral grande', '2 huevos o 125 g de tofu', 'Un puñado de espinacas', '½ aguacate'],
+    buy: [['tortillas', 1], ['huevos', 2], ['espinacas', 30], ['aguacate', 0.5]],
     steps: ['Haz un revuelto con los huevos o el tofu y las espinacas.', 'Ponlo en la tortilla con el aguacate.', 'Enróllala.'],
     tip: 'Para llevar: envuelto en papel de aluminio, máximo 2 horas fuera de la nevera.'
   },
   vasito: {
     n: 'Vasito de tarta de queso', t: '5 min', p: '~20 g',
     ing: ['2 cdas de granola baja en azúcar', '200 g de skyr natural', 'Ralladura de limón', 'Unas gotas de vainilla', 'Fruta de temporada troceada'],
+    buy: [['granola', 20], ['skyr', 200], ['citricos', 1]],
     steps: ['Mezcla el skyr con el limón y la vainilla.', 'En un vaso, pon la granola, luego el skyr y la fruta por encima.'],
     tip: 'Móntalo justo antes de comer para que la granola siga crujiente.'
   }
@@ -914,27 +923,32 @@ const PLAN = [
 const OTHER = [
   { d: 'Lunes', train: 1, m: [
     { h: '7:30', l: 'Desayuno', r: 'tostada_aguacate' },
-    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 2 mandarinas' },
+    { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g · Vitamina B12 1000 µg', buy: [['creatina', 5], ['b12', 1]] },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 2 mandarinas', buy: [['nueces', 15], ['pistachos', 15], ['citricos', 2]] },
     { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
   ]},
   { d: 'Martes', train: 1, m: [
     { h: '7:30', l: 'Desayuno', r: 'wrap' },
-    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 manzana' },
+    { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g con agua o con el desayuno', buy: [['creatina', 5]] },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 manzana', buy: [['nueces', 15], ['anacardos', 15], ['manzanas', 1]] },
     { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
   ]},
   { d: 'Miércoles', train: 1, night: 'Esta noche: prepara la avena de mañana, variante tarta de manzana.', m: [
     { h: '7:30', l: 'Desayuno', r: 'tostada_hummus' },
-    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 1 naranja (hasta noviembre, 2 mandarinas)' },
+    { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g con agua o con el desayuno', buy: [['creatina', 5]] },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 1 naranja (hasta noviembre, 2 mandarinas)', buy: [['nueces', 15], ['pistachos', 15], ['citricos', 1]] },
     { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
   ]},
   { d: 'Jueves', night: 'Esta noche: prepara la avena de mañana, variante caqui y canela.', m: [
-    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante tarta de manzana.' },
-    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 plátano' },
+    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante tarta de manzana.', buy: [['manzanas', 1], ['nueces', 10]] },
+    { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g · Vitamina B12 1000 µg', buy: [['creatina', 5], ['b12', 1]] },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 plátano', buy: [['nueces', 15], ['anacardos', 15], ['platanos', 1]] },
     { h: '17:00', l: 'Merienda', r: 'vasito', note: 'En un tarro con la granola aparte y bolsa isotérmica.' }
   ]},
   { d: 'Viernes', m: [
-    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante caqui y canela.' },
-    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y avellanas (15 g) · 2 mandarinas' },
+    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante caqui y canela.', buy: [['caquis', 1]] },
+    { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g con agua o con el desayuno', buy: [['creatina', 5]] },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y avellanas (15 g) · 2 mandarinas', buy: [['nueces', 15], ['avellanas', 15], ['citricos', 2]] },
     { h: '17:00', l: 'Merienda', r: 'tortitas', note: 'Hazlas por la mañana y llévalas en un táper.' }
   ]}
 ];
@@ -944,6 +958,11 @@ const OTHER_WHY = {
     ['Pistachos', '2 días', 'Los que más proteína y potasio tienen. Van en días de entreno.'],
     ['Anacardos', '2 días', 'Magnesio, zinc y hierro: los minerales que más cuestan en dieta vegetariana.'],
     ['Avellanas', '1 día', 'Vitamina E. Buenas, pero sin un papel especial en tu caso.']
+  ],
+  sup: [
+    ['Creatina', '7 días', '5 g cada día, también sábado y domingo. La hora da igual; lo que cuenta es no saltársela.'],
+    ['Lino molido', '5 días', 'Una cucharada: va en el batido de lunes a miércoles y en la avena el jueves y el viernes. Aporta omega-3 vegetal.'],
+    ['Vitamina B12', '2 días', 'Con 1000 µg, la pauta habitual es 2 veces por semana: lunes y jueves. Si tu médico te dio otra, sigue la suya.']
   ],
   fruit: [
     ['Mandarina o naranja', '3 días', 'Vitamina C en plena temporada de resfriados. Las mandarinas llegan en octubre y las naranjas en noviembre.'],
@@ -1210,6 +1229,34 @@ function aggregate(w) {
   return m;
 }
 
+// Lo que gastan las otras comidas en una semana (lunes a viernes, más la creatina del fin de semana).
+function aggregateBreakfast() {
+  const m = {};
+  const add = (k, q) => {
+    if (!ITEMS[k]) return;
+    const e = m[k] || (m[k] = { q: 0, has: false, rec: [] });
+    if (q != null) { e.q += q; e.has = true; }
+  };
+  OTHER.forEach((d) => d.m.forEach((x) => {
+    if (x.r && B[x.r].buy) B[x.r].buy.forEach(([k, q]) => add(k, q));
+    if (x.buy) x.buy.forEach(([k, q]) => add(k, q));
+  }));
+  add('creatina', 10);
+  return m;
+}
+
+// Suma comidas y cenas con las otras comidas.
+function mergeTotals(agg, bagg) {
+  const t = {};
+  Object.keys(agg).forEach((k) => { t[k] = { q: agg[k].q, has: agg[k].has, rec: agg[k].rec.slice() }; });
+  Object.keys(bagg).forEach((k) => {
+    const e = t[k] || (t[k] = { q: 0, has: false, rec: [] });
+    if (bagg[k].has) { e.q += bagg[k].q; e.has = true; }
+    e.rec.push('tus desayunos y meriendas');
+  });
+  return t;
+}
+
 function appearances(id) {
   const out = [];
   PLAN.forEach((P, wi) => {
@@ -1273,6 +1320,7 @@ function renderOther() {
   const todayIdx = (new Date().getDay() + 6) % 7;
   let h = menuSeg();
   h += `<p class="lede">Desayuno, media mañana y merienda, de lunes a viernes. Se repite todas las semanas.</p>`;
+  h += `<p class="note-box"><b>Sábado y domingo también:</b> creatina 5 g.</p>`;
   h += `<div class="days">` + OTHER.map((d, i) => {
     const today = i === todayIdx;
     const slots = d.m.map((x) => {
@@ -1287,7 +1335,7 @@ function renderOther() {
   const whyBlock = (title, rows) => `<div class="why"><h3>${esc(title)}</h3>${rows.map(([n, c, t]) => `<div class="why-row"><b>${esc(n)}</b><span class="c">${esc(c)}</span><p>${esc(t)}</p></div>`).join('')}</div>`;
   h += `<h2 class="h2">Por qué este reparto</h2>`;
   h += `<p class="lede">Cada día, unos 30 g de frutos secos: dos tipos de 15 g, un puñado pequeño de cada uno o unas 3 nueces.</p>`;
-  h += whyBlock('Frutos secos', OTHER_WHY.nuts) + whyBlock('Fruta', OTHER_WHY.fruit);
+  h += whyBlock('Suplementos', OTHER_WHY.sup) + whyBlock('Frutos secos', OTHER_WHY.nuts) + whyBlock('Fruta', OTHER_WHY.fruit);
   $('#v-menu').innerHTML = h;
 }
 
@@ -1358,7 +1406,7 @@ function itemRow(k, qty, forText, tags) {
 }
 
 function renderCompra() {
-  const w = state.week, agg = aggregate(w), ck = weekChecks();
+  const w = state.week, agg = aggregate(w), bagg = aggregateBreakfast(), tot = mergeTotals(agg, bagg), ck = weekChecks();
   let hidden = 0, total = 0, done = 0;
   const visible = (k) => !(ITEMS[k].p && isHave(k) && !ck[k]);
   let groups = '';
@@ -1369,19 +1417,20 @@ function renderCompra() {
       if (!visible(k)) { hidden++; return; }
       total++; if (ck[k]) done++;
       let tags = ITEMS[k].p ? '<span class="bdg pan">Despensa</span>' : '';
-      if (BREAKFAST_KEYS.includes(k)) tags += '<span class="bdg home">También para desayunos</span>';
-      rows.push(itemRow(k, fmtQty(k, agg[k]), 'Para: ' + agg[k].rec.join(', '), tags));
+      if (bagg[k]) tags += '<span class="bdg home">Incluye tus desayunos</span>';
+      rows.push(itemRow(k, fmtQty(k, tot[k]), 'Para: ' + tot[k].rec.join(', '), tags));
     });
     if (rows.length) groups += `<div class="grp"><h3>${esc(label)}</h3><div class="list">${rows.join('')}</div></div>`;
   });
 
   const brkRows = [];
-  BREAKFAST_KEYS.forEach((k) => {
-    if (agg[k] && ITEMS[k].c !== 'desayuno') return; // ya está en la lista principal
+  const brkKeys = BREAKFAST_KEYS.concat(Object.keys(bagg).filter((k) => !BREAKFAST_KEYS.includes(k)));
+  brkKeys.forEach((k) => {
+    if (agg[k] && ITEMS[k].c !== 'desayuno') return; // ya está en la lista principal, con la cantidad sumada
     if (!visible(k)) { hidden++; return; }
     total++; if (ck[k]) done++;
-    const e = agg[k];
-    brkRows.push(itemRow(k, e ? fmtQty(k, e) : '', e ? 'También para: ' + e.rec.join(', ') : '', ITEMS[k].p ? '<span class="bdg pan">Despensa</span>' : ''));
+    const e = tot[k];
+    brkRows.push(itemRow(k, e ? fmtQty(k, e) : '', agg[k] ? 'También para: ' + agg[k].rec.join(', ') : '', ITEMS[k].p ? '<span class="bdg pan">Despensa</span>' : ''));
   });
   if (brkRows.length) groups += `<div class="grp brk"><h3>Desayunos, meriendas y postres</h3><div class="list">${brkRows.join('')}</div></div>`;
 
@@ -1396,7 +1445,7 @@ function renderCompra() {
 }
 
 function renderDespensa() {
-  const agg = aggregate(state.week);
+  const agg = mergeTotals(aggregate(state.week), aggregateBreakfast());
   const keys = Object.keys(ITEMS).filter((k) => ITEMS[k].p);
   const have = keys.filter(isHave).length;
   let h = '';
