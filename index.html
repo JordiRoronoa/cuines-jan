@@ -121,7 +121,8 @@
   .order { margin: 0; padding-left: 20px; font-size: 14.5px; display: flex; flex-direction: column; gap: 3px; }
   .days { display: flex; flex-direction: column; gap: 10px; }
   .day { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px 12px; }
-  .day { scroll-margin-top: 104px; }
+  .day { scroll-margin-top: 164px; }
+  .top-seg { margin-top: 10px; }
   .day.is-today {
     border-color: var(--accent); border-width: 2px; padding: 9px 13px 11px;
     background: rgba(106, 43, 91, 0.2);
@@ -1300,7 +1301,7 @@ function renderTop() {
   if (state.tab === 'menu') sub = state.menuOther ? 'Desayunos, media mañana y merienda · lunes a viernes' : sub + ' · Semana ' + state.week;
   if (state.tab === 'compra') sub = 'Semana ' + state.week + ' · para 2 personas';
   if (state.tab === 'recetas') sub = MAIN_IDS.length + ' comidas y cenas · ' + BRK_IDS.length + ' desayunos, meriendas y postres';
-  $('#top').innerHTML = `<div class="eyebrow">Cuines Jan</div><h1>${esc(t)}</h1>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}`;
+  $('#top').innerHTML = `<div class="eyebrow">Cuines Jan</div><h1>${esc(t)}</h1>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}${state.tab === 'menu' ? `<div class="top-seg">${menuSeg()}</div>` : ''}`;
 }
 
 function mealRow(label, m) {
@@ -1323,7 +1324,7 @@ function menuSeg() {
 
 function renderOther() {
   const todayIdx = (new Date().getDay() + 6) % 7;
-  let h = menuSeg();
+  let h = '';
   h += `<p class="lede">Desayuno, media mañana y merienda, de lunes a viernes. Se repite todas las semanas.</p>`;
   h += `<p class="note-box"><b>Sábado y domingo también:</b> creatina 5 g.</p>`;
   h += `<div class="days">` + OTHER.map((d, i) => {
@@ -1348,7 +1349,7 @@ function renderMenu() {
   if (state.menuOther) return renderOther();
   const w = state.week, P = PLAN[w - 1];
   const todayIdx = (new Date().getDay() + 6) % 7;
-  let h = menuSeg();
+  let h = '';
   h += `<h2 class="h2">Preparación</h2><p class="lede">Haz la compra de la semana antes del domingo anterior. Cada receta de batch da dos comidas: una para esta semana y otra congelada para la siguiente.</p>`;
   if (w === 1) h += `<p class="note-box"><b>La primera vez:</b> el jueves, el viernes y el domingo de esta semana tocan platos congelados de la semana 2, que aún no existen. Ese primer domingo, prepara también la tanda de la semana 2, o cambia esos días por recetas rápidas.</p>`;
   h += P.batch.map((s) => `<article class="prep">
