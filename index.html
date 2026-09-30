@@ -133,6 +133,20 @@
   .day-prep strong { font-weight: 700; }
   .day-prep .chip { background: var(--surface); border-color: transparent; color: var(--ink); }
 
+  .seg.three button { padding-inline: 4px; font-size: 14.5px; }
+  .slot { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding-block: 7px; border-top: 1px solid var(--line); }
+  .slot-h { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .slot-h span { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+  .slot-note { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+  .slot-t { font-weight: 700; }
+  .night { margin-top: 8px; background: var(--frz-soft); color: var(--frz); border-radius: 10px; padding: 8px 10px; font-size: 14.5px; font-weight: 700; }
+  .why { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+  .why h3 { font-family: var(--display); font-weight: 400; font-size: 18px; margin: 0; }
+  .why-row { display: grid; grid-template-columns: 1fr auto; gap: 1px 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+  .why-row b { font-size: 15.5px; }
+  .why-row .c { font-weight: 700; color: var(--olive-ink); background: var(--olive-soft); border-radius: 999px; padding: 1px 9px; font-size: 13px; align-self: start; font-variant-numeric: tabular-nums; }
+  .why-row p { grid-column: 1 / -1; margin: 0; font-size: 14.5px; color: var(--muted); }
+
   /* Recetas */
   .list { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
   .rrow { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--line); padding: 12px 14px; }
@@ -274,6 +288,9 @@ const ITEMS = {
   rucula: { n: 'Rúcula', c: 'verdura', u: 'g' },
   fruta: { n: 'Fruta de temporada', c: 'verdura' },
   platanos: { n: 'Plátanos', c: 'verdura' },
+  manzanas: { n: 'Manzanas', c: 'verdura' },
+  citricos: { n: 'Mandarinas o naranjas', c: 'verdura' },
+  caquis: { n: 'Caquis', c: 'verdura' },
 
   tofu: { n: 'Tofu firme', c: 'frescos', u: 'g' },
   heura: { n: 'Heura picada', c: 'frescos', u: 'g' },
@@ -287,6 +304,7 @@ const ITEMS = {
   bases_pizza: { n: 'Bases de pizza integrales', c: 'frescos', u: 'ud' },
   skyr: { n: 'Skyr lácteo natural', c: 'frescos' },
   skyr_alpro: { n: 'Alpro Estilo Skyr Natural', c: 'frescos' },
+  hummus: { n: 'Hummus', c: 'frescos' },
 
   pan: { n: 'Pan 100 % integral', c: 'pan', u: 'reb' },
 
@@ -353,7 +371,7 @@ const PANTRY_CATS = [
 ];
 
 // Productos del bloque "Desayunos, meriendas y postres" de la compra.
-const BREAKFAST_KEYS = ['skyr_alpro', 'skyr', 'queso_batido', 'huevos', 'fruta', 'platanos', 'aguacate', 'tomate', 'pan',
+const BREAKFAST_KEYS = ['skyr_alpro', 'skyr', 'queso_batido', 'hummus', 'huevos', 'platanos', 'manzanas', 'citricos', 'caquis', 'aguacate', 'tomate', 'pan',
   'avena', 'lino', 'semillas_calabaza', 'nueces', 'avellanas', 'anacardos', 'pistachos', 'proteina', 'cacao',
   'crema_cacahuete', 'canela', 'bebida_avena', 'bebida_soja', 'frutos_rojos', 'granola', 'tortillas', 'levadura', 'vainilla'];
 
@@ -769,6 +787,17 @@ const B = {
     ],
     keep: 'Nevera hasta 2 días.'
   },
+  tostada_aguacate: {
+    n: 'Tostadas de aguacate y huevo', t: '10 min', p: '~20 g',
+    ing: ['2 rebanadas de pan 100 % integral', '½ aguacate', '2 huevos', '1 tomate', 'Un hilo de AOVE, sal y pimienta'],
+    steps: ['Tuesta el pan.', 'Haz los huevos a la plancha o revueltos, 3 min.', 'Chafa el aguacate sobre el pan con sal y un hilo de AOVE.', 'Pon encima el tomate en rodajas y los huevos.']
+  },
+  tostada_hummus: {
+    n: 'Tostadas de hummus y huevo', t: '12 min', p: '~20 g',
+    ing: ['2 rebanadas de pan 100 % integral', '3 cdas de hummus', '1 huevo', '1 tomate', '1 cda de semillas de calabaza'],
+    steps: ['Cuece el huevo 10 min, o usa uno cocido de la nevera.', 'Tuesta el pan y úntalo con el hummus.', 'Pon encima el tomate en rodajas y el huevo en láminas.', 'Termina con las semillas de calabaza.'],
+    tip: 'El hummus solo aporta poca proteína. El huevo sube la tostada a unos 20 g.'
+  },
   tortitas: {
     n: 'Tortitas de avena y plátano', t: '10 min', p: '~17 g',
     ing: ['1 plátano maduro', '2 huevos', '40 g de avena'],
@@ -880,6 +909,48 @@ const PLAN = [
     ]
   }
 ];
+
+// Otras comidas: desayuno, media mañana y merienda, de lunes a viernes. Se repite cada semana.
+const OTHER = [
+  { d: 'Lunes', train: 1, m: [
+    { h: '7:30', l: 'Desayuno', r: 'tostada_aguacate' },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 2 mandarinas' },
+    { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
+  ]},
+  { d: 'Martes', train: 1, m: [
+    { h: '7:30', l: 'Desayuno', r: 'wrap' },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 manzana' },
+    { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
+  ]},
+  { d: 'Miércoles', train: 1, night: 'Esta noche: prepara la avena de mañana, variante tarta de manzana.', m: [
+    { h: '7:30', l: 'Desayuno', r: 'tostada_hummus' },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 1 naranja (hasta noviembre, 2 mandarinas)' },
+    { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
+  ]},
+  { d: 'Jueves', night: 'Esta noche: prepara la avena de mañana, variante caqui y canela.', m: [
+    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante tarta de manzana.' },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 plátano' },
+    { h: '17:00', l: 'Merienda', r: 'vasito', note: 'En un tarro con la granola aparte y bolsa isotérmica.' }
+  ]},
+  { d: 'Viernes', m: [
+    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante caqui y canela.' },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y avellanas (15 g) · 2 mandarinas' },
+    { h: '17:00', l: 'Merienda', r: 'tortitas', note: 'Hazlas por la mañana y llévalas en un táper.' }
+  ]}
+];
+const OTHER_WHY = {
+  nuts: [
+    ['Nueces', '5 días', 'El fruto seco con más omega-3 vegetal. Es el que más necesitas, porque no comes pescado.'],
+    ['Pistachos', '2 días', 'Los que más proteína y potasio tienen. Van en días de entreno.'],
+    ['Anacardos', '2 días', 'Magnesio, zinc y hierro: los minerales que más cuestan en dieta vegetariana.'],
+    ['Avellanas', '1 día', 'Vitamina E. Buenas, pero sin un papel especial en tu caso.']
+  ],
+  fruit: [
+    ['Mandarina o naranja', '3 días', 'Vitamina C en plena temporada de resfriados. Las mandarinas llegan en octubre y las naranjas en noviembre.'],
+    ['Manzana', '1 día', 'Fibra soluble y se lleva bien en el bolso.'],
+    ['Plátano', '1 día', 'Solo uno, porque de lunes a miércoles ya va dentro del batido.']
+  ]
+};
 
 // Guía de alimentos. Filas: [alimento, temporada, por qué, frecuencia, texto extra]
 // Frecuencia: d diario · s 3–5/semana · w 1–2/semana · o ocasional · p entreno
@@ -1088,6 +1159,7 @@ const hashTab = (location.hash || '').replace('#', '');
 const state = {
   tab: TABS.includes(hashTab) ? hashTab : store.get('tab', 'menu'),
   week: store.get('week', 1) === 2 ? 2 : 1,
+  menuOther: store.get('menuOther', false) === true,
   recSeg: store.get('recSeg', 'main') === 'brk' ? 'brk' : 'main',
   checks: store.get('checks', {}) || {},
   pantry: store.get('pantry', {}) || {},
@@ -1173,7 +1245,7 @@ function weekSeg() {
 
 function renderTop() {
   let [t, sub] = TITLES[state.tab];
-  if (state.tab === 'compra' || state.tab === 'menu') sub = (sub ? sub + ' · ' : '') + 'Semana ' + state.week;
+  if (state.tab === 'menu') sub = state.menuOther ? 'Desayunos, media mañana y merienda · lunes a viernes' : sub + ' · Semana ' + state.week;
   if (state.tab === 'compra') sub = 'Semana ' + state.week + ' · para 2 personas';
   if (state.tab === 'recetas') sub = MAIN_IDS.length + ' comidas y cenas · ' + BRK_IDS.length + ' desayunos, meriendas y postres';
   $('#top').innerHTML = `<div class="eyebrow">Cuines Jan</div><h1>${esc(t)}</h1>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}`;
@@ -1188,10 +1260,42 @@ function mealRow(label, m) {
   </div></div>`;
 }
 
+function menuSeg() {
+  const o = state.menuOther;
+  return `<div class="seg three" role="group" aria-label="Vista del menú">
+    <button data-week="1" aria-pressed="${!o && state.week === 1}">Semana 1</button>
+    <button data-week="2" aria-pressed="${!o && state.week === 2}">Semana 2</button>
+    <button data-other aria-pressed="${o}">Otras comidas</button>
+  </div>`;
+}
+
+function renderOther() {
+  const todayIdx = (new Date().getDay() + 6) % 7;
+  let h = menuSeg();
+  h += `<p class="lede">Desayuno, media mañana y merienda, de lunes a viernes. Se repite todas las semanas.</p>`;
+  h += `<div class="days">` + OTHER.map((d, i) => {
+    const today = i === todayIdx;
+    const slots = d.m.map((x) => {
+      const what = x.r ? `<button class="rec-link" data-rec="${x.r}">${esc(B[x.r].n)}</button>` : `<span class="slot-t">${esc(x.t)}</span>`;
+      return `<div class="slot"><div class="slot-h">${esc(x.h)}<span>${esc(x.l)}</span></div><div>${what}${x.note ? `<div class="slot-note">${esc(x.note)}</div>` : ''}</div></div>`;
+    }).join('');
+    return `<article class="day${today ? ' is-today' : ''}">
+      <div class="day-h"><span class="day-n">${esc(d.d)}</span>${d.train ? '<span class="bdg batch">Día de entreno</span>' : ''}${today ? '<span class="bdg today">Hoy</span>' : ''}</div>
+      ${slots}${d.night ? `<div class="night">${esc(d.night)}</div>` : ''}
+    </article>`;
+  }).join('') + `</div>`;
+  const whyBlock = (title, rows) => `<div class="why"><h3>${esc(title)}</h3>${rows.map(([n, c, t]) => `<div class="why-row"><b>${esc(n)}</b><span class="c">${esc(c)}</span><p>${esc(t)}</p></div>`).join('')}</div>`;
+  h += `<h2 class="h2">Por qué este reparto</h2>`;
+  h += `<p class="lede">Cada día, unos 30 g de frutos secos: dos tipos de 15 g, un puñado pequeño de cada uno o unas 3 nueces.</p>`;
+  h += whyBlock('Frutos secos', OTHER_WHY.nuts) + whyBlock('Fruta', OTHER_WHY.fruit);
+  $('#v-menu').innerHTML = h;
+}
+
 function renderMenu() {
+  if (state.menuOther) return renderOther();
   const w = state.week, P = PLAN[w - 1];
   const todayIdx = (new Date().getDay() + 6) % 7;
-  let h = weekSeg();
+  let h = menuSeg();
   h += `<h2 class="h2">Preparación</h2><p class="lede">Haz la compra de la semana antes del domingo anterior. Cada receta de batch da dos comidas: una para esta semana y otra congelada para la siguiente.</p>`;
   if (w === 1) h += `<p class="note-box"><b>La primera vez:</b> el jueves, el viernes y el domingo de esta semana tocan platos congelados de la semana 2, que aún no existen. Ese primer domingo, prepara también la tanda de la semana 2, o cambia esos días por recetas rápidas.</p>`;
   h += P.batch.map((s) => `<article class="prep">
@@ -1401,7 +1505,8 @@ document.addEventListener('click', (ev) => {
   if (!t) return;
   if (t.dataset.tab) return setTab(t.dataset.tab);
   if (t.dataset.goto) return setTab(t.dataset.goto);
-  if (t.dataset.week) { state.week = Number(t.dataset.week); state.armed = false; store.set('week', state.week); render(); if (state.tab === 'menu') window.scrollTo(0, 0); return; }
+  if (t.hasAttribute('data-other')) { state.menuOther = true; store.set('menuOther', true); render(); window.scrollTo(0, 0); return; }
+  if (t.dataset.week) { state.week = Number(t.dataset.week); state.menuOther = false; store.set('menuOther', false); state.armed = false; store.set('week', state.week); render(); if (state.tab === 'menu') window.scrollTo(0, 0); return; }
   if (t.dataset.seg) { state.recSeg = t.dataset.seg; store.set('recSeg', state.recSeg); render(); return; }
   if (t.dataset.rec) return openDetail(t.dataset.rec);
   if (t.hasAttribute('data-back')) return closeDetail();
