@@ -121,7 +121,12 @@
   .order { margin: 0; padding-left: 20px; font-size: 14.5px; display: flex; flex-direction: column; gap: 3px; }
   .days { display: flex; flex-direction: column; gap: 10px; }
   .day { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px 12px; }
-  .day.is-today { border-color: var(--accent); border-width: 2px; padding: 9px 13px 11px; }
+  .day { scroll-margin-top: 104px; }
+  .day.is-today {
+    border-color: var(--accent); border-width: 2px; padding: 9px 13px 11px;
+    background: rgba(106, 43, 91, 0.2);
+    background: color-mix(in srgb, var(--accent) 20%, var(--surface));
+  }
   .day-h { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
   .day-n { font-family: var(--display); font-size: 18px; }
   .meal { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding-block: 6px; border-top: 1px solid var(--line); }
@@ -1534,10 +1539,19 @@ function render() {
 /* ============================================================
    ACCIONES
    ============================================================ */
+// Lleva la vista al día de hoy en el menú. Si hoy no sale (fin de semana en Otras comidas), sube arriba.
+function focusToday(smooth) {
+  const el = document.querySelector('#v-menu .day.is-today');
+  if (!el) { window.scrollTo(0, 0); return; }
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({ block: 'start', behavior: smooth && !reduce ? 'smooth' : 'auto' });
+}
+
 function setTab(t) {
   state.tab = t; state.armed = false; store.set('tab', t);
   try { history.replaceState(null, '', '#' + t); } catch (e) { /* sin historial */ }
-  render(); window.scrollTo(0, 0);
+  render();
+  if (t === 'menu') focusToday(true); else window.scrollTo(0, 0);
 }
 function openDetail(id) {
   state.detail = id; renderDetail();
@@ -1554,8 +1568,8 @@ document.addEventListener('click', (ev) => {
   if (!t) return;
   if (t.dataset.tab) return setTab(t.dataset.tab);
   if (t.dataset.goto) return setTab(t.dataset.goto);
-  if (t.hasAttribute('data-other')) { state.menuOther = true; store.set('menuOther', true); render(); window.scrollTo(0, 0); return; }
-  if (t.dataset.week) { state.week = Number(t.dataset.week); state.menuOther = false; store.set('menuOther', false); state.armed = false; store.set('week', state.week); render(); if (state.tab === 'menu') window.scrollTo(0, 0); return; }
+  if (t.hasAttribute('data-other')) { state.menuOther = true; store.set('menuOther', true); render(); focusToday(true); return; }
+  if (t.dataset.week) { state.week = Number(t.dataset.week); state.menuOther = false; store.set('menuOther', false); state.armed = false; store.set('week', state.week); render(); if (state.tab === 'menu') focusToday(true); return; }
   if (t.dataset.seg) { state.recSeg = t.dataset.seg; store.set('recSeg', state.recSeg); render(); return; }
   if (t.dataset.rec) return openDetail(t.dataset.rec);
   if (t.hasAttribute('data-back')) return closeDetail();
@@ -1589,6 +1603,7 @@ document.addEventListener('change', (ev) => {
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && state.detail) closeDetail(); });
 
 render();
+if (state.tab === 'menu') setTimeout(() => focusToday(false), 60);
 </script>
 </body>
 </html>
