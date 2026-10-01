@@ -360,7 +360,8 @@ const ITEMS = {
   levadura: { n: 'Levadura química', c: 'desayuno', p: 1 },
   vainilla: { n: 'Vainilla', c: 'desayuno', p: 1 },
   creatina: { n: 'Creatina monohidrato', c: 'desayuno', u: 'g', p: 1 },
-  b12: { n: 'Vitamina B12 1000 µg', c: 'desayuno', u: 'ud', uw: 'pastillas', p: 1 }
+  b12: { n: 'Vitamina B12 1000 µg', c: 'desayuno', u: 'ud', uw: 'pastillas', p: 1 },
+  gestagyn: { n: 'Gestagyn Lactancia', c: 'desayuno', u: 'ud', uw: 'cápsulas', p: 1 }
 };
 
 const SHOP_CATS = [
@@ -381,7 +382,7 @@ const PANTRY_CATS = [
 // Productos del bloque "Desayunos, meriendas y postres" de la compra.
 const BREAKFAST_KEYS = ['skyr_alpro', 'skyr', 'queso_batido', 'hummus', 'huevos', 'platanos', 'manzanas', 'citricos', 'caquis', 'aguacate', 'tomate', 'pan',
   'avena', 'lino', 'semillas_calabaza', 'nueces', 'avellanas', 'anacardos', 'pistachos', 'proteina', 'cacao',
-  'crema_cacahuete', 'canela', 'bebida_avena', 'bebida_soja', 'frutos_rojos', 'granola', 'tortillas', 'levadura', 'vainilla', 'creatina', 'b12'];
+  'crema_cacahuete', 'canela', 'bebida_avena', 'bebida_soja', 'frutos_rojos', 'granola', 'tortillas', 'levadura', 'vainilla', 'creatina', 'b12', 'gestagyn'];
 
 // Recetas de comida y cena. Cantidades para toda la receta (rac = raciones).
 // ing: [producto, cantidad, unidad, texto que se muestra]
@@ -809,6 +810,13 @@ const B = {
     steps: ['Cuece el huevo 10 min, o usa uno cocido de la nevera.', 'Tuesta el pan y úntalo con el hummus.', 'Pon encima el tomate en rodajas y el huevo en láminas.', 'Termina con las semillas de calabaza.'],
     tip: 'El hummus solo aporta poca proteína. El huevo sube la tostada a unos 20 g.'
   },
+  crudites_hummus: {
+    n: 'Zanahorias con hummus y pistachos', t: '5 min', p: '~8 g',
+    ing: ['2 zanahorias', '4 cdas de hummus', '15 g de pistachos'],
+    buy: [['zanahoria', 2], ['hummus', 60], ['pistachos', 15]],
+    steps: ['Pela las zanahorias y córtalas en bastones.', 'Acompáñalas con el hummus y los pistachos.'],
+    tip: 'Para llevar: el hummus aguanta unas 2 horas fuera de la nevera.'
+  },
   tortitas: {
     n: 'Tortitas de avena y plátano', t: '10 min', p: '~17 g',
     ing: ['1 plátano maduro', '2 huevos', '40 g de avena'],
@@ -819,6 +827,7 @@ const B = {
   bol_skyr: {
     n: 'Bol de skyr', t: '3 min', p: '~30 g',
     ing: ['250 g de skyr lácteo natural', '30 g de avena o granola baja en azúcar', 'Fruta de temporada', 'Un puñado de nueces'],
+    buy: [['skyr', 250], ['avena', 30], ['nueces', 15], ['citricos', 1]],
     steps: ['Pon el skyr en un bol.', 'Añade la avena, la fruta y las nueces.'],
     tip: 'Con Alpro Estilo Skyr Natural baja a unos 20 g de proteína.'
   },
@@ -842,11 +851,13 @@ const B = {
   manzana: {
     n: 'Manzana o pera asada', t: '7 min', p: '~5–8 g',
     ing: ['1 manzana o pera', 'Canela', '1 yogur natural', 'Unas nueces'],
+    buy: [['manzanas', 1], ['yogur', 125], ['nueces', 10]],
     steps: ['Córtala en trozos y espolvorea canela.', 'Tápala y métela 4–5 min en el microondas.', 'Sírvela con el yogur y las nueces.']
   },
   mugcake: {
     n: 'Mug cake', t: '5 min', p: '~15–20 g',
     ing: ['1 huevo', '30 g de avena molida', '15 g de proteína en polvo o 1 cda de cacao', '½ plátano chafado', '½ cdta de levadura química'],
+    buy: [['huevos', 1], ['avena', 30], ['proteina', 15], ['platanos', 0.5]],
     steps: ['Mézclalo todo en una taza grande.', 'Microondas 90 segundos.'],
     tip: 'Si queda crudo en el centro, 15 segundos más.'
   },
@@ -926,7 +937,7 @@ const PLAN = [
 ];
 
 // Otras comidas: desayuno, media mañana y merienda, de lunes a viernes. Se repite cada semana.
-const OTHER = [
+const OTHER_J = [
   { d: 'Lunes', train: 1, m: [
     { h: '7:30', l: 'Desayuno', r: 'tostada_aguacate' },
     { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g · Vitamina B12 1000 µg', buy: [['creatina', 5], ['b12', 1]] },
@@ -939,13 +950,13 @@ const OTHER = [
     { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 manzana', buy: [['nueces', 15], ['anacardos', 15], ['manzanas', 1]] },
     { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
   ]},
-  { d: 'Miércoles', train: 1, night: 'Esta noche: prepara la avena de mañana, variante tarta de manzana.', m: [
+  { d: 'Miércoles', train: 1, night: 'Esta noche: prepara dos tarros de avena, el tuyo y el de Carlota (variante tarta de manzana).', m: [
     { h: '7:30', l: 'Desayuno', r: 'tostada_hummus' },
     { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g con agua o con el desayuno', buy: [['creatina', 5]] },
     { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y pistachos (15 g) · 1 naranja (hasta noviembre, 2 mandarinas)', buy: [['nueces', 15], ['pistachos', 15], ['citricos', 1]] },
     { h: '17:00', l: 'Merienda', r: 'batido', note: 'Entre 1 y 2 horas antes de entrenar. Llévalo en un termo.' }
   ]},
-  { d: 'Jueves', night: 'Esta noche: prepara la avena de mañana, variante caqui y canela.', m: [
+  { d: 'Jueves', night: 'Esta noche: prepara dos tarros de avena, el tuyo y el de Carlota (variante caqui y canela).', m: [
     { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante tarta de manzana.', buy: [['manzanas', 1], ['nueces', 10]] },
     { h: '7:30', l: 'Suplementos', t: 'Creatina 5 g · Vitamina B12 1000 µg', buy: [['creatina', 5], ['b12', 1]] },
     { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 plátano', buy: [['nueces', 15], ['anacardos', 15], ['platanos', 1]] },
@@ -958,6 +969,65 @@ const OTHER = [
     { h: '17:00', l: 'Merienda', r: 'tortitas', note: 'Hazlas por la mañana y llévalas en un táper.' }
   ]}
 ];
+const C_EUT = { h: '6:30', l: 'Medicación', t: 'Eutirox 50 con un vaso de agua, en ayunas', note: 'Desayuna entre 30 y 60 min después. El café, al menos 1 h después.' };
+const C_GYM = { h: '9:00', l: 'Entreno', t: 'Fuerza, de 9:00 a 10:30' };
+const C_SUP = { h: '14:00', l: 'Con la comida', t: 'Gestagyn Lactancia · creatina 5 g', note: 'El Gestagyn lleva hierro: siempre al menos 4 h después del Eutirox.', buy: [['gestagyn', 1], ['creatina', 5]] };
+const C_SUPB = { h: '14:00', l: 'Con la comida', t: 'Gestagyn Lactancia · creatina 5 g · Vitamina B12 1000 µg', note: 'El Gestagyn lleva hierro: siempre al menos 4 h después del Eutirox.', buy: [['gestagyn', 1], ['creatina', 5], ['b12', 1]] };
+const OTHER_C = [
+  { d: 'Lunes', train: 1, m: [
+    C_EUT,
+    { h: '7:30', l: 'Desayuno', r: 'tostada_aguacate', note: 'El mismo que Jordi.' },
+    C_GYM,
+    { h: '11:00', l: 'Después de entrenar', r: 'batido', note: 'Proteína y carbohidrato para recuperar el músculo.' },
+    C_SUPB,
+    { h: '17:00', l: 'Merienda', r: 'crudites_hummus' }
+  ]},
+  { d: 'Martes', m: [
+    C_EUT,
+    { h: '7:30', l: 'Desayuno', r: 'wrap', note: 'El mismo que Jordi.' },
+    { h: '11:00', l: 'Media mañana', t: 'Yogur natural con nueces (15 g) · 1 mandarina', buy: [['yogur', 125], ['nueces', 15], ['citricos', 1]] },
+    C_SUP,
+    { h: '17:00', l: 'Merienda', r: 'tortitas' }
+  ]},
+  { d: 'Miércoles', night: 'Esta noche: prepara dos tarros de avena, el tuyo y el de Jordi (variante tarta de manzana).', m: [
+    C_EUT,
+    { h: '7:30', l: 'Desayuno', r: 'tostada_hummus', note: 'El mismo que Jordi.' },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y anacardos (15 g) · 1 manzana', buy: [['nueces', 15], ['anacardos', 15], ['manzanas', 1]] },
+    C_SUP,
+    { h: '17:00', l: 'Merienda', r: 'vasito', note: 'En un tarro con la granola aparte.' }
+  ]},
+  { d: 'Jueves', train: 1, night: 'Esta noche: prepara dos tarros de avena, el tuyo y el de Jordi (variante caqui y canela).', m: [
+    C_EUT,
+    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante tarta de manzana, la misma que Jordi.', buy: [['manzanas', 1], ['nueces', 10]] },
+    C_GYM,
+    { h: '11:00', l: 'Después de entrenar', r: 'bol_skyr', note: 'Proteína, calcio y carbohidrato para recuperar.' },
+    C_SUPB,
+    { h: '17:00', l: 'Merienda', r: 'mugcake' }
+  ]},
+  { d: 'Viernes', m: [
+    C_EUT,
+    { h: '7:30', l: 'Desayuno', r: 'avena_noche', note: 'Variante caqui y canela, la misma que Jordi.', buy: [['caquis', 1]] },
+    { h: '11:00', l: 'Media mañana', t: 'Nueces (15 g) y avellanas (15 g) · 2 mandarinas', buy: [['nueces', 15], ['avellanas', 15], ['citricos', 2]] },
+    C_SUP,
+    { h: '17:00', l: 'Merienda', r: 'manzana' }
+  ]}
+];
+const OTHER = { jordi: OTHER_J, carlota: OTHER_C };
+const OTHER_WHY_C = {
+  sup: [
+    ['Eutirox', 'cada día', 'En ayunas con agua, 30–60 min antes del desayuno. El café y la soja, al menos 1 h después. El hierro y el calcio en pastillas, al menos 4 h después, porque frenan su absorción. Si cambia la hora o el tipo de desayuno, conviene decírselo a la endocrina.'],
+    ['Gestagyn Lactancia', 'cada día', 'Es correcto para la lactancia. Lleva 200 µg de yodo, 160 mg de DHA de microalgas (apto para vegetarianas), 14 mg de hierro, vitamina D y 2,5 µg de B12. El yodo hace falta aunque tome Eutirox, porque el bebé lo recibe por la leche.'],
+    ['Creatina', 'cada día', 'e-lactancia la clasifica de riesgo bajo, pero hay pocos estudios en lactancia: conviene comentarlo con la matrona. La dosis habitual es 3–5 g; si pone "5 mg", seguramente son 5 g.'],
+    ['Vitamina B12 1000 µg', '2 días', 'Lunes y jueves, del mismo bote que Jordi. Siendo vegetariana y dando el pecho, el bebé depende de su B12, y los 2,5 µg del Gestagyn pueden quedarse cortos. Un análisis lo confirma.']
+  ],
+  food: [
+    ['Desayuno', 'igual que Jordi', 'Los cinco desayunos son los mismos que los de Jordi: se preparan una vez para los dos.'],
+    ['Después de entrenar', 'lunes y jueves', 'Batido o bol de skyr a las 11: proteína y carbohidrato para recuperar el músculo.'],
+    ['Lácteos', 'cada día', 'Yogur, skyr o queso batido en la media mañana o la merienda. La lactancia pide unos 1000 mg de calcio al día.'],
+    ['Lactancia', 'cada día', 'Pide unas 500 kcal y unos 20 g de proteína más al día. Un vaso de agua en cada toma. El café, hasta 2 tazas al día.'],
+    ['Hipotiroidismo', 'siempre', 'La soja y las crucíferas no están prohibidas. Lo que importa es separar la soja 1 h del Eutirox y mantener horarios parecidos cada día.']
+  ]
+};
 const OTHER_WHY = {
   nuts: [
     ['Nueces', '5 días', 'El fruto seco con más omega-3 vegetal. Es el que más necesitas, porque no comes pescado.'],
@@ -1185,6 +1255,7 @@ const state = {
   tab: TABS.includes(hashTab) ? hashTab : store.get('tab', 'menu'),
   week: store.get('week', 1) === 2 ? 2 : 1,
   menuOther: store.get('menuOther', false) === true,
+  person: store.get('person', 'jordi') === 'carlota' ? 'carlota' : 'jordi',
   recSeg: store.get('recSeg', 'main') === 'brk' ? 'brk' : 'main',
   checks: store.get('checks', {}) || {},
   pantry: store.get('pantry', {}) || {},
@@ -1235,7 +1306,7 @@ function aggregate(w) {
   return m;
 }
 
-// Lo que gastan las otras comidas en una semana (lunes a viernes, más la creatina del fin de semana).
+// Lo que gastan las otras comidas de Jordi y Carlota en una semana (lunes a viernes, más el fin de semana).
 function aggregateBreakfast() {
   const m = {};
   const add = (k, q) => {
@@ -1243,11 +1314,13 @@ function aggregateBreakfast() {
     const e = m[k] || (m[k] = { q: 0, has: false, rec: [] });
     if (q != null) { e.q += q; e.has = true; }
   };
-  OTHER.forEach((d) => d.m.forEach((x) => {
+  Object.values(OTHER).forEach((days) => days.forEach((d) => d.m.forEach((x) => {
     if (x.r && B[x.r].buy) B[x.r].buy.forEach(([k, q]) => add(k, q));
     if (x.buy) x.buy.forEach(([k, q]) => add(k, q));
-  }));
-  add('creatina', 10);
+  })));
+  // Sábado y domingo: creatina de los dos y Gestagyn de Carlota.
+  add('creatina', 20);
+  add('gestagyn', 2);
   return m;
 }
 
@@ -1298,10 +1371,10 @@ function weekSeg() {
 
 function renderTop() {
   let [t, sub] = TITLES[state.tab];
-  if (state.tab === 'menu') sub = state.menuOther ? 'Desayunos, media mañana y merienda · lunes a viernes' : sub + ' · Semana ' + state.week;
+  if (state.tab === 'menu') sub = state.menuOther ? 'Otras comidas de ' + (state.person === 'carlota' ? 'Carlota' : 'Jordi') + ' · lunes a viernes' : sub + ' · Semana ' + state.week;
   if (state.tab === 'compra') sub = 'Semana ' + state.week + ' · para 2 personas';
   if (state.tab === 'recetas') sub = MAIN_IDS.length + ' comidas y cenas · ' + BRK_IDS.length + ' desayunos, meriendas y postres';
-  $('#top').innerHTML = `<div class="eyebrow">Cuines Jan</div><h1>${esc(t)}</h1>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}${state.tab === 'menu' ? `<div class="top-seg">${menuSeg()}</div>` : ''}`;
+  $('#top').innerHTML = `<div class="eyebrow">Cuines Jan</div><h1>${esc(t)}</h1>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}${state.tab === 'menu' ? `<div class="top-seg">${menuSeg()}</div>` : ''}${state.tab === 'menu' && state.menuOther ? `<div class="top-seg">${personSeg()}</div>` : ''}`;
 }
 
 function mealRow(label, m) {
@@ -1322,12 +1395,23 @@ function menuSeg() {
   </div>`;
 }
 
+function personSeg() {
+  const c = state.person === 'carlota';
+  return `<div class="seg" role="group" aria-label="Persona">
+    <button data-person="carlota" aria-pressed="${c}">Carlota</button>
+    <button data-person="jordi" aria-pressed="${!c}">Jordi</button>
+  </div>`;
+}
+
 function renderOther() {
   const todayIdx = (new Date().getDay() + 6) % 7;
+  const isC = state.person === 'carlota';
   let h = '';
   h += `<p class="lede">Desayuno, media mañana y merienda, de lunes a viernes. Se repite todas las semanas.</p>`;
-  h += `<p class="note-box"><b>Sábado y domingo también:</b> creatina 5 g.</p>`;
-  h += `<div class="days">` + OTHER.map((d, i) => {
+  h += isC
+    ? `<p class="note-box"><b>Todos los días, también sábado y domingo:</b> Eutirox en ayunas, y Gestagyn y creatina con la comida. Es una orientación general: que la endocrina y la matrona revisen los suplementos.</p>`
+    : `<p class="note-box"><b>Sábado y domingo también:</b> creatina 5 g.</p>`;
+  h += `<div class="days">` + OTHER[state.person].map((d, i) => {
     const today = i === todayIdx;
     const slots = d.m.map((x) => {
       const what = x.r ? `<button class="rec-link" data-rec="${x.r}">${esc(B[x.r].n)}</button>` : `<span class="slot-t">${esc(x.t)}</span>`;
@@ -1340,8 +1424,9 @@ function renderOther() {
   }).join('') + `</div>`;
   const whyBlock = (title, rows) => `<div class="why"><h3>${esc(title)}</h3>${rows.map(([n, c, t]) => `<div class="why-row"><b>${esc(n)}</b><span class="c">${esc(c)}</span><p>${esc(t)}</p></div>`).join('')}</div>`;
   h += `<h2 class="h2">Por qué este reparto</h2>`;
-  h += `<p class="lede">Cada día, unos 30 g de frutos secos: dos tipos de 15 g, un puñado pequeño de cada uno o unas 3 nueces.</p>`;
-  h += whyBlock('Suplementos', OTHER_WHY.sup) + whyBlock('Frutos secos', OTHER_WHY.nuts) + whyBlock('Fruta', OTHER_WHY.fruit);
+  if (!isC) h += `<p class="lede">Cada día, unos 30 g de frutos secos: dos tipos de 15 g, un puñado pequeño de cada uno o unas 3 nueces.</p>`;
+  if (isC) h += whyBlock('Medicación y suplementos', OTHER_WHY_C.sup) + whyBlock('Comidas', OTHER_WHY_C.food);
+  else h += whyBlock('Suplementos', OTHER_WHY.sup) + whyBlock('Frutos secos', OTHER_WHY.nuts) + whyBlock('Fruta', OTHER_WHY.fruit);
   $('#v-menu').innerHTML = h;
 }
 
@@ -1545,7 +1630,9 @@ function focusToday(smooth) {
   const el = document.querySelector('#v-menu .day.is-today');
   if (!el) { window.scrollTo(0, 0); return; }
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  el.scrollIntoView({ block: 'start', behavior: smooth && !reduce ? 'smooth' : 'auto' });
+  const head = document.querySelector('.top');
+  const top = el.getBoundingClientRect().top + window.scrollY - (head ? head.offsetHeight : 0) - 12;
+  window.scrollTo({ top: Math.max(0, top), behavior: smooth && !reduce ? 'smooth' : 'auto' });
 }
 
 function setTab(t) {
@@ -1569,6 +1656,7 @@ document.addEventListener('click', (ev) => {
   if (!t) return;
   if (t.dataset.tab) return setTab(t.dataset.tab);
   if (t.dataset.goto) return setTab(t.dataset.goto);
+  if (t.dataset.person) { state.person = t.dataset.person; store.set('person', state.person); render(); focusToday(true); return; }
   if (t.hasAttribute('data-other')) { state.menuOther = true; store.set('menuOther', true); render(); focusToday(true); return; }
   if (t.dataset.week) { state.week = Number(t.dataset.week); state.menuOther = false; store.set('menuOther', false); state.armed = false; store.set('week', state.week); render(); if (state.tab === 'menu') focusToday(true); return; }
   if (t.dataset.seg) { state.recSeg = t.dataset.seg; store.set('recSeg', state.recSeg); render(); return; }
