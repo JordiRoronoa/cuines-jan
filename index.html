@@ -327,6 +327,8 @@ const ITEMS = {
 
   tomate_triturado: { n: 'Tomate triturado', c: 'conservas', u: 'g', p: 1 },
   salsa_soja: { n: 'Salsa de soja', c: 'conservas', p: 1 },
+  sofrito: { n: 'Sofrito de tomate (bote)', c: 'conservas', u: 'g', p: 1 },
+  levadura_nutri: { n: 'Levadura nutricional', c: 'conservas', u: 'g', p: 1 },
 
   aove: { n: 'Aceite de oliva virgen extra', c: 'basicos', p: 1 },
   sal: { n: 'Sal yodada', c: 'basicos', p: 1 },
@@ -411,55 +413,57 @@ const R = {
       'Cuece 35 min a fuego medio-bajo, o 15 min en olla exprés. Sala al final.',
       'Sirve con un chorrito de limón: su vitamina C ayuda a absorber el hierro.'
     ],
-    keep: 'Nevera 3 días. Congelador 3 meses. Congela 2 raciones el mismo domingo para la otra semana.'
+    keep: 'Nevera 3 días. Congelador 3 meses. Congela 2 raciones el mismo martes para la otra semana.'
   },
   crema: {
-    n: 'Crema de calabaza y lenteja roja', rac: 4, batch: 1, t: '30 min', p: '~20 g',
+    n: 'Crema de calabaza y lenteja roja', rac: 4, batch: 1, t: '30 min', p: '~22 g',
     ing: [
       ['calabaza', 800, 'g', '800 g de calabaza'],
       ['zanahoria', 2, 'ud', '2 zanahorias'],
       ['puerro', 1, 'ud', '1 puerro'],
-      ['lenteja_roja', 160, 'g', '160 g de lenteja roja'],
+      ['lenteja_roja', 200, 'g', '200 g de lenteja roja'],
+      ['levadura_nutri', 40, 'g', '40 g de levadura nutricional (unas 8 cdas)'],
       ['comino', null, null, '1 cdta de comino'],
       ['aove', null, null, '2 cdas de AOVE'],
       ['sal', null, null, 'Sal yodada'],
-      ['pan', 4, 'reb', '4 rebanadas de pan integral, para servir'],
-      ['huevos', 4, 'ud', '4 huevos, para servir']
+      ['pan', 4, 'reb', '4 rebanadas de pan integral, para servir']
     ],
     steps: [
       'Trocea la calabaza, la zanahoria y el puerro.',
       'Sofríe el puerro 3 min con el AOVE.',
-      'Añade el resto de verduras, la lenteja roja lavada, el comino y 1 l de agua. Cuece 20 min.',
-      'Tritura hasta que quede fina. Prueba y ajusta la sal.',
-      'Al servir: una tostada integral con un huevo a la plancha por persona.'
+      'Añade el resto de verduras, la lenteja roja lavada, el comino y 1,1 l de agua. Cuece 20 min.',
+      'Añade la levadura nutricional y tritura hasta que quede fina. Prueba y ajusta la sal.',
+      'Sirve con una tostada de pan integral por persona.'
     ],
-    keep: 'Nevera 3 días. Congelador 3 meses, solo la crema, sin el huevo. Congela 2 raciones el mismo domingo para la otra semana.'
+    keep: 'Nevera 3 días. Congelador 3 meses. Congela 2 raciones el mismo martes para la otra semana.',
+    tip: 'La levadura nutricional da sabor a queso y unos 5 g de proteína por plato. Mejor si está enriquecida en B12.'
   },
   berenjenas: {
-    n: 'Berenjenas rellenas de Heura', rac: 4, batch: 1, home: 1, t: '45 min', p: '~22 g',
+    n: 'Berenjenas rellenas de soja texturizada', rac: 4, batch: 1, home: 1, t: '45 min', p: '~15 g',
     ing: [
-      ['berenjena', 4, 'ud', '4 berenjenas'],
-      ['heura', 320, 'g', '320 g de Heura picada'],
+      ['berenjena', 2, 'ud', '2 berenjenas: media por persona y comida'],
+      ['soja_text', 80, 'g', '80 g de soja texturizada fina'],
       ['cebolla', 1, 'ud', '1 cebolla'],
       ['ajos', 2, 'ud', '2 dientes de ajo'],
-      ['tomate_triturado', 400, 'g', '400 g de tomate triturado'],
-      ['mozzarella', 120, 'g', '120 g de mozzarella rallada'],
+      ['tomate_triturado', 250, 'g', '250 g de tomate triturado'],
+      ['mozzarella', 80, 'g', '80 g de mozzarella rallada'],
       ['oregano', null, null, '1 cdta de orégano'],
-      ['aove', null, null, '3 cdas de AOVE'],
+      ['aove', null, null, '2 cdas de AOVE'],
       ['sal', null, null, 'Sal yodada']
     ],
     steps: [
       'Enciende el horno a 200 °C. Corta las berenjenas por la mitad a lo largo y haz cortes en rejilla en la pulpa.',
-      'Riégalas con AOVE, sálalas y hornéalas 25 min.',
-      'Mientras, sofríe la cebolla y el ajo 5 min. Añade la Heura 5 min, y luego el tomate con el orégano 5 min más.',
+      'Riégalas con AOVE, sálalas y hornéalas 25 min. Mientras, hidrata la soja texturizada 10 min en agua caliente y escúrrela bien.',
+      'Sofríe la cebolla y el ajo 5 min. Añade la soja y dórala 3 min. Añade el tomate y el orégano y cuece 8 min más.',
       'Vacía la pulpa con una cuchara, pícala y mézclala con el relleno.',
-      'Rellena las berenjenas, cúbrelas con la mozzarella y gratina 8 min.'
+      'Rellena las 4 mitades, cúbrelas con la mozzarella y gratina 8 min.'
     ],
-    keep: 'Nevera 3 días. Congelador 3 meses. Congela 2 raciones el mismo domingo para la otra semana.',
-    variant: 'Desde noviembre la berenjena sale de temporada. Usa 2 calabazas tipo cacahuete partidas por la mitad y hornéalas 40 min en lugar de 25.'
+    keep: 'Nevera 3 días. Congelador 3 meses. Congela 2 mitades el mismo martes para la otra semana.',
+    tip: 'Media berenjena es una comida ligera. Con una rebanada de pan integral o un yogur de postre llegas a unos 20 g de proteína.',
+    variant: 'Desde noviembre la berenjena sale de temporada. Usa 2 calabazas pequeñas tipo cacahuete partidas por la mitad y hornéalas 40 min en lugar de 25.'
   },
   wok: {
-    n: 'Wok de tofu con brócoli', rac: 2, t: '15 min', t2: 'más el arroz', p: '~25 g',
+    n: 'Wok de tofu con brócoli', rac: 4, t: '15 min', t2: 'más el arroz', p: '~18 g',
     ing: [
       ['tofu', 300, 'g', '300 g de tofu firme'],
       ['brocoli', 1, 'ud', '1 brócoli'],
@@ -469,16 +473,16 @@ const R = {
       ['jengibre', null, null, '½ cdta de jengibre en polvo'],
       ['salsa_soja', null, null, '3 cdas de salsa de soja'],
       ['aove', null, null, '2 cdas de AOVE'],
-      ['arroz', 150, 'g', '150 g de arroz integral (o el cocido en el batch)']
+      ['arroz', 300, 'g', '300 g de arroz integral (o el cocido en el batch)']
     ],
     steps: [
       'Si no tienes arroz del batch, cuécelo según el paquete (unos 30 min).',
       'Corta el tofu en dados y dóralo 6 min en el wok con el AOVE, a fuego fuerte. Resérvalo.',
       'Saltea el brócoli en ramilletes y el pimiento y la zanahoria en tiras, 5 min.',
       'Devuelve el tofu y añade el ajo picado, el jengibre y la salsa de soja. Remueve 1 min.',
-      'Sirve sobre el arroz.'
+      'Sirve la mitad sobre el arroz. Guarda la otra mitad en un táper para mañana.'
     ],
-    keep: 'Mejor recién hecho. El arroz cocido aguanta 3 días en la nevera si lo enfrías rápido.'
+    keep: 'Nevera 2 días. Enfría rápido el arroz y las sobras antes de guardarlos.'
   },
   revuelto: {
     n: 'Revuelto de setas y espinacas', rac: 2, t: '10 min', p: '~23 g',
@@ -501,7 +505,7 @@ const R = {
     keep: 'Recién hecho.'
   },
   garbanzos: {
-    n: 'Garbanzos con espinacas', rac: 2, t: '20 min', p: '~22 g',
+    n: 'Garbanzos con espinacas', rac: 4, t: '20 min', p: '~17 g',
     ing: [
       ['garbanzos', 400, 'g', '400 g de garbanzos cocidos escurridos (1 bote grande)'],
       ['espinacas', 200, 'g', '200 g de espinacas (frescas o congeladas)'],
@@ -509,7 +513,7 @@ const R = {
       ['pan', 1, 'reb', '1 rebanada de pan integral'],
       ['comino', null, null, '1 cdta de comino'],
       ['pimenton', null, null, '1 cdta de pimentón dulce'],
-      ['huevos', 2, 'ud', '2 huevos'],
+      ['huevos', 4, 'ud', '4 huevos'],
       ['aove', null, null, '2 cdas de AOVE'],
       ['limon', 0.5, 'ud', '½ limón, para servir'],
       ['sal', null, null, 'Sal yodada']
@@ -519,21 +523,20 @@ const R = {
       'Dora el ajo laminado y la rebanada de pan en el AOVE. Sácalos y májalos con el comino, el pimentón y un poco de agua.',
       'En la misma sartén, saltea las espinacas 3 min.',
       'Añade los garbanzos lavados, el majado y medio vaso de agua. Cocina 8 min a fuego suave.',
-      'Sirve con un huevo duro por persona y unas gotas de limón.'
+      'Sirve la mitad con un huevo duro por persona y unas gotas de limón. Guarda el resto para mañana.'
     ],
     keep: 'Nevera 2 días, con los huevos aparte.'
   },
   fajitas: {
-    n: 'Fajitas de tofu o Heura', rac: 2, home: 1, t: '20 min', p: '~30 g',
+    n: 'Fajitas de tofu o Heura', rac: 2, home: 1, t: '20 min', p: '~27 g',
     ing: [
       ['tofu', 250, 'g', '250 g de tofu firme (o Heura)'],
       ['pimiento_rojo', 1, 'ud', '1 pimiento rojo'],
       ['pimiento_verde', 1, 'ud', '1 pimiento verde'],
       ['cebolla', 1, 'ud', '1 cebolla'],
-      ['alubias_negras', 250, 'g', '250 g de alubias negras cocidas (1 bote)'],
-      ['tortillas', 6, 'ud', '6 tortillas integrales'],
+      ['tortillas', 4, 'ud', '4 tortillas integrales: 2 por persona'],
       ['aguacate', 1, 'ud', '1 aguacate'],
-      ['limon', 1, 'ud', '1 limón'],
+      ['limon', 0.5, 'ud', '½ limón'],
       ['yogur', 125, 'g', '125 g de yogur griego natural'],
       ['comino', null, null, '1 cdta de comino'],
       ['pimenton_ahumado', null, null, '1 cdta de pimentón ahumado'],
@@ -544,13 +547,13 @@ const R = {
       'Corta el tofu, los pimientos y la cebolla en tiras.',
       'Dora el tofu 5 min con el AOVE, el comino y el pimentón. Resérvalo.',
       'Saltea los pimientos y la cebolla 6 min.',
-      'Añade el tofu y las alubias escurridas y lavadas. Calienta 2 min.',
+      'Añade el tofu y calienta 2 min.',
       'Chafa el aguacate con limón y sal. Calienta las tortillas y sirve con el yogur en lugar de nata agria.'
     ],
     keep: 'El relleno aguanta 2 días en la nevera.'
   },
   bandeja: {
-    n: 'Bandeja de patata, zanahoria, brócoli y tofu', rac: 2, home: 1, t: '35 min', p: '~25 g',
+    n: 'Bandeja de patata, zanahoria, brócoli y tofu', rac: 4, home: 1, t: '35 min', p: '~16 g',
     ing: [
       ['patata', 500, 'g', '500 g de patatas'],
       ['zanahoria', 3, 'ud', '3 zanahorias'],
@@ -568,7 +571,7 @@ const R = {
       'Corta la patata y la zanahoria en trozos. Mézclalas con 2 cdas de AOVE, el pimentón y sal, y hornéalas 20 min.',
       'Añade el brócoli en ramilletes y el tofu en dados con el resto del AOVE. Hornea 15 min más.',
       'Mientras, mezcla el yogur con el zumo de limón, el ajo rallado y sal.',
-      'Sirve la bandeja con la salsa por encima.'
+      'Sirve la mitad con la salsa por encima. Guarda la otra mitad para mañana, con la salsa aparte.'
     ],
     keep: 'Nevera 2 días.'
   },
@@ -642,7 +645,7 @@ const R = {
       'Añade el tomate, el boniato en dados pequeños y 300 ml de agua. Cuece 20 min.',
       'Añade las alubias lavadas y cuece 5 min más. Sirve con el arroz integral.'
     ],
-    keep: 'Nevera 3 días. Congelador 3 meses, con su arroz. Congela 2 raciones el mismo domingo para la otra semana.'
+    keep: 'Nevera 3 días. Congelador 3 meses, con su arroz. Congela 2 raciones el mismo martes para la otra semana.'
   },
   bechamel: {
     n: 'Espinacas con bechamel y huevo', rac: 4, batch: 1, home: 1, t: '25 min', p: '~25 g',
@@ -666,27 +669,25 @@ const R = {
     keep: 'Nevera 3 días. Congela la fuente sin huevo: el huevo duro congelado queda gomoso. El día que la comas, gratínala y añade 3 huevos duros picados.'
   },
   bolonesa: {
-    n: 'Pasta de lentejas a la boloñesa', rac: 4, batch: 1, t: '25 min', p: '~30 g',
+    n: 'Pasta de lentejas a la boloñesa', rac: 4, batch: 1, t: '20 min', p: '~30 g',
     ing: [
       ['pasta_lenteja', 320, 'g', '320 g de pasta de lenteja roja (80 g por persona y comida)'],
       ['soja_text', 80, 'g', '80 g de soja texturizada fina'],
-      ['cebolla', 1, 'ud', '1 cebolla'],
-      ['zanahoria', 2, 'ud', '2 zanahorias'],
-      ['ajos', 2, 'ud', '2 dientes de ajo'],
-      ['tomate_triturado', 800, 'g', '800 g de tomate triturado'],
+      ['sofrito', 600, 'g', '600 g de sofrito de tomate comprado (2 botes)'],
       ['oregano', null, null, '1 cdta de orégano'],
-      ['aove', null, null, '2 cdas de AOVE'],
+      ['aove', null, null, '1 cda de AOVE'],
       ['queso_rallado', 40, 'g', '40 g de queso rallado'],
       ['sal', null, null, 'Sal yodada']
     ],
     steps: [
-      'Hidrata la soja texturizada 10 min en agua caliente y escúrrela.',
-      'Sofríe la cebolla, la zanahoria rallada y el ajo 8 min con el AOVE.',
-      'Añade la soja y dora 3 min. Añade el tomate y el orégano y cuece 15 min.',
+      'Hidrata la soja texturizada 10 min en agua caliente y escúrrela bien.',
+      'Dórala 3 min en una sartén con el AOVE.',
+      'Añade el sofrito, el orégano y un vaso pequeño de agua. Cuece 10 min a fuego suave.',
       'El día de comer, cuece 160 g de pasta para los dos, unos 8 min, y mézclala con la mitad de la salsa.',
       'Sirve con queso rallado por encima.'
     ],
-    keep: 'La salsa: nevera 3 días y congelador 3 meses. Congela la mitad el mismo domingo para la otra semana. La pasta, siempre recién hecha.'
+    keep: 'La salsa: nevera 3 días y congelador 3 meses. Congela la mitad el mismo martes para la otra semana. La pasta, siempre recién hecha.',
+    tip: 'Elige un sofrito con aceite de oliva y sin azúcar añadido: lo pone en la etiqueta.'
   },
   pastel: {
     n: 'Pastel de verduras al horno', rac: 2, t: '30 min', p: '~23 g',
@@ -747,14 +748,15 @@ const R = {
       ['yogur', 125, 'g', '125 g de yogur natural'],
       ['aove', null, null, '2 cdas de AOVE'],
       ['sal', null, null, 'Sal yodada'],
-      ['arroz', 150, 'g', '150 g de arroz integral (el cocido en el batch)']
+      ['arroz', 150, 'g', '150 g de arroz integral']
     ],
     steps: [
-      'Sofríe la cebolla y el ajo picados 5 min con el AOVE.',
+      'Cuece el arroz según el paquete (unos 30 min).',
+      'Mientras, sofríe la cebolla y el ajo picados 5 min con el AOVE.',
       'Añade el curry y el jengibre, remueve 30 segundos y añade el tomate. Cocina 5 min.',
       'Añade los garbanzos lavados y las espinacas. Cocina 5 min más.',
       'Fuera del fuego, añade el yogur y remueve.',
-      'Sirve con el arroz del batch, calentado.'
+      'Sirve con el arroz.'
     ],
     keep: 'Nevera 2 días.'
   },
@@ -883,55 +885,56 @@ const B = {
 };
 const BRK_IDS = Object.keys(B);
 
-// Menú de dos semanas. Ninguna receta se repite en la misma semana, salvo la bandeja.
-// b = del batch de este domingo (nevera) · f = congelado del batch de la otra semana.
+// Menú de dos semanas, de martes a lunes. La compra llega el martes por la mañana y ese día se hace el batch.
+// Ninguna receta se repite en la misma semana, salvo las sobras de una receta de 4 raciones.
+// b = del batch de este martes (nevera) · f = congelado del batch de la otra semana · s = sobras de ayer.
 const PLAN = [
   {
     batch: [
       {
-        day: 'Domingo anterior', time: '≈ 2 h', recipes: ['berenjenas', 'lentejas', 'crema'],
+        day: 'Martes, al llegar la compra', time: '≈ 2 h', recipes: ['berenjenas', 'lentejas', 'bechamel'],
         order: [
-          'Mete las berenjenas en el horno (25 min).',
+          'Enciende el horno, mete las berenjenas (25 min) y pon la soja texturizada a hidratar.',
           'Mientras, haz el sofrito de las lentejas y déjalas cociendo.',
-          'Cuece 150 g de arroz integral para el wok del martes.',
-          'Prepara la crema de calabaza y tritúrala.',
+          'Cuece 3 huevos para las espinacas y 300 g de arroz integral para el wok del miércoles.',
           'Haz el relleno, rellena las berenjenas y gratínalas.',
+          'Prepara las espinacas con bechamel. Gratina la fuente con huevo; la otra va al congelador sin gratinar.',
           'Guarda en la nevera una comida de cada receta. Congela la otra para la semana 2.'
         ]
       }
     ],
     days: [
-      { d: 'Lunes', c: { r: 'lentejas', b: 1 }, n: { r: 'crema', b: 1 } },
-      { d: 'Martes', c: { r: 'berenjenas', b: 1 }, n: { r: 'wok' } },
-      { d: 'Miércoles', c: { r: 'bandeja' }, n: { r: 'revuelto' } },
-      { d: 'Jueves', c: { r: 'chili', f: 1 }, n: { r: 'garbanzos' } },
-      { d: 'Viernes', c: { r: 'bolonesa', f: 1 }, n: { r: 'fajitas' } },
-      { d: 'Sábado', c: { r: 'bandeja' }, n: { r: 'pizza' } },
-      { d: 'Domingo', c: { r: 'bechamel', f: 1 }, n: { r: 'quesadillas' }, next: 2 }
+      { d: 'Martes', c: { r: 'lentejas', b: 1 }, n: { r: 'revuelto' } },
+      { d: 'Miércoles', c: { r: 'berenjenas', b: 1 }, n: { r: 'wok' } },
+      { d: 'Jueves', c: { r: 'wok', s: 1 }, n: { r: 'bechamel', b: 1 } },
+      { d: 'Viernes', c: { r: 'crema', f: 1 }, n: { r: 'fajitas' } },
+      { d: 'Sábado', c: { r: 'chili', f: 1 }, n: { r: 'pizza' } },
+      { d: 'Domingo', c: { r: 'bandeja' }, n: { r: 'curry' } },
+      { d: 'Lunes', c: { r: 'bandeja', s: 1 }, n: { r: 'bolonesa', f: 1 }, next: 2 }
     ]
   },
   {
     batch: [
       {
-        day: 'Domingo anterior', time: '≈ 2 h', recipes: ['chili', 'bechamel', 'bolonesa'],
+        day: 'Martes, al llegar la compra', time: '≈ 1 h 30', recipes: ['chili', 'bolonesa', 'crema'],
         order: [
           'Hidrata a la vez la soja texturizada del chili y de la boloñesa (200 g).',
-          'Cuece 3 huevos para las espinacas y 450 g de arroz integral: 300 g para el chili y 150 g para el curry del miércoles.',
+          'Cuece 300 g de arroz integral para el chili.',
           'Haz el chili.',
-          'Mientras, haz la salsa boloñesa en otra olla.',
-          'Prepara las espinacas con bechamel. Gratina la fuente con huevo; la otra va al congelador sin gratinar.',
+          'Mientras, haz la boloñesa en una sartén: soja dorada y sofrito, 10 min.',
+          'Prepara la crema de calabaza y tritúrala con la levadura nutricional.',
           'Guarda en la nevera una comida de cada receta. Congela la otra para la semana 1.'
         ]
       }
     ],
     days: [
-      { d: 'Lunes', c: { r: 'chili', b: 1 }, n: { r: 'bechamel', b: 1 } },
-      { d: 'Martes', c: { r: 'bolonesa', b: 1 }, n: { r: 'shakshuka' } },
-      { d: 'Miércoles', c: { r: 'bandeja' }, n: { r: 'curry' } },
-      { d: 'Jueves', c: { r: 'lentejas', f: 1 }, n: { r: 'pastel' } },
-      { d: 'Viernes', c: { r: 'berenjenas', f: 1 }, n: { r: 'fajitas' } },
-      { d: 'Sábado', c: { r: 'bandeja' }, n: { r: 'pizza' } },
-      { d: 'Domingo', c: { r: 'crema', f: 1 }, n: { r: 'pasta_brocoli' }, next: 1 }
+      { d: 'Martes', c: { r: 'chili', b: 1 }, n: { r: 'pastel' } },
+      { d: 'Miércoles', c: { r: 'bolonesa', b: 1 }, n: { r: 'quesadillas' } },
+      { d: 'Jueves', c: { r: 'crema', b: 1 }, n: { r: 'garbanzos' } },
+      { d: 'Viernes', c: { r: 'garbanzos', s: 1 }, n: { r: 'fajitas' } },
+      { d: 'Sábado', c: { r: 'lentejas', f: 1 }, n: { r: 'pizza' } },
+      { d: 'Domingo', c: { r: 'berenjenas', f: 1 }, n: { r: 'shakshuka' } },
+      { d: 'Lunes', c: { r: 'bechamel', f: 1 }, n: { r: 'pasta_brocoli' }, next: 1 }
     ]
   }
 ];
@@ -1289,7 +1292,7 @@ function recipesCooked(w) {
   const P = PLAN[w - 1];
   const ids = [];
   P.batch.forEach((s) => s.recipes.forEach((id) => ids.push(id)));
-  P.days.forEach((d) => ['c', 'n'].forEach((m) => { if (!d[m].b && !d[m].f) ids.push(d[m].r); }));
+  P.days.forEach((d) => ['c', 'n'].forEach((m) => { if (!d[m].b && !d[m].f && !d[m].s) ids.push(d[m].r); }));
   return ids;
 }
 
@@ -1379,7 +1382,9 @@ function renderTop() {
 
 function mealRow(label, m) {
   const r = R[m.r];
-  const b = (m.b ? '<span class="bdg batch">Del batch</span>' : '') + (m.f ? '<span class="bdg frz">Congelado de la otra semana: sácalo la noche antes</span>' : '');
+  const twice = r.rac === 4 && !r.batch;
+  const b = (m.b ? '<span class="bdg batch">Del batch</span>' : '') + (m.f ? '<span class="bdg frz">Congelado de la otra semana: sácalo la noche antes</span>' : '')
+    + (m.s ? '<span class="bdg pan">Sobras de ayer</span>' : '') + (twice && !m.s ? '<span class="bdg pan">Da para 2 comidas: guarda la mitad para mañana</span>' : '');
   return `<div class="meal"><span class="ml">${label}</span><div>
     <button class="rec-link" data-rec="${m.r}">${esc(r.n)}</button>
     ${b ? `<div class="badges">${b}</div>` : ''}
@@ -1433,10 +1438,11 @@ function renderOther() {
 function renderMenu() {
   if (state.menuOther) return renderOther();
   const w = state.week, P = PLAN[w - 1];
-  const todayIdx = (new Date().getDay() + 6) % 7;
+  // La semana va de martes (0) a lunes (6).
+  const todayIdx = (new Date().getDay() + 5) % 7;
   let h = '';
-  h += `<h2 class="h2">Preparación</h2><p class="lede">Haz la compra de la semana antes del domingo anterior. Cada receta de batch da dos comidas: una para esta semana y otra congelada para la siguiente.</p>`;
-  if (w === 1) h += `<p class="note-box"><b>La primera vez:</b> el jueves, el viernes y el domingo de esta semana tocan platos congelados de la semana 2, que aún no existen. Ese primer domingo, prepara también la tanda de la semana 2, o cambia esos días por recetas rápidas.</p>`;
+  h += `<h2 class="h2">Preparación</h2><p class="lede">La compra llega el martes por la mañana y ese mismo día haces el batch. Cada receta de batch da dos comidas: una para esta semana y otra congelada para la siguiente.</p>`;
+  if (w === 1) h += `<p class="note-box"><b>La primera vez:</b> el viernes, el sábado y el lunes de esta semana tocan platos congelados de la semana 2, que aún no existen. Ese primer martes, prepara también la tanda de la semana 2, o cambia esos días por recetas rápidas.</p>`;
   h += P.batch.map((s) => `<article class="prep">
       <div class="prep-h"><span class="prep-day">${esc(s.day)}</span><span class="prep-t">${esc(s.time)}</span></div>
       <div class="chips">${s.recipes.map((id) => `<button class="chip" data-rec="${id}">${esc(R[id].n)}</button>`).join('')}</div>
@@ -1447,7 +1453,7 @@ function renderMenu() {
     let extra = '';
     if (d.next) {
       const s = PLAN[d.next - 1].batch[0];
-      extra = `<div class="day-prep"><strong>Hoy toca preparar la semana ${d.next} (${esc(s.time)}):</strong><div class="chips">${s.recipes.map((id) => `<button class="chip" data-rec="${id}">${esc(R[id].n)}</button>`).join('')}</div><button class="link" data-week="${d.next}">Ver la semana ${d.next}</button></div>`;
+      extra = `<div class="day-prep"><strong>Mañana llega la compra y toca preparar la semana ${d.next} (${esc(s.time)}):</strong><div class="chips">${s.recipes.map((id) => `<button class="chip" data-rec="${id}">${esc(R[id].n)}</button>`).join('')}</div><button class="link" data-week="${d.next}">Ver la semana ${d.next}</button></div>`;
     }
     const today = i === todayIdx;
     return `<article class="day${today ? ' is-today' : ''}">
@@ -1466,10 +1472,11 @@ function renderRecetas() {
     <button data-seg="brk" aria-pressed="${seg === 'brk'}">Desayunos, meriendas y postres</button>
   </div>`;
   if (seg === 'main') {
-    h += `<p class="lede">Para 2 personas. Las de batch dan 4 raciones: una comida esta semana y otra congelada para la siguiente.</p>`;
+    h += `<p class="lede">Para 2 personas. Las de batch dan 4 raciones: una comida esta semana y otra congelada para la siguiente. Las que pone "2 comidas" se comen hoy y mañana.</p>`;
     h += `<div class="list">` + MAIN_IDS.map((id) => {
       const r = R[id];
-      const tags = (r.home ? '<span class="bdg home">De casa</span>' : '') + (r.batch ? '<span class="bdg batch">Batch</span>' : '<span class="bdg pan">Rápida</span>');
+      const tags = (r.home ? '<span class="bdg home">De casa</span>' : '') + (r.batch ? '<span class="bdg batch">Batch</span>' : '<span class="bdg pan">Rápida</span>')
+        + (r.rac === 4 && !r.batch ? '<span class="bdg pan">2 comidas</span>' : '');
       return `<button class="rrow" data-rec="${id}"><span class="rn">${esc(r.n)}</span><span class="rarrow" aria-hidden="true">›</span>
         <span class="rm">${esc(r.t)} · ${esc(r.p)} de proteína</span><span class="rtags">${tags}</span></button>`;
     }).join('') + `</div>`;
@@ -1528,7 +1535,7 @@ function renderCompra() {
   const pct = total ? Math.round((done / total) * 100) : 0;
   let h = weekSeg();
   h += `<div><div class="progress"><span><b>${done}</b> de ${total} en el carro</span><span>${pct} %</span></div><div class="bar"><i style="width:${pct}%"></i></div></div>`;
-  h += `<p class="note-box">Setas, espinacas frescas y rúcula aguantan 4–5 días. Si puedes, cómpralas el jueves.</p>`;
+  h += `<p class="note-box">La compra llega el martes. Setas, espinacas frescas y rúcula aguantan 4–5 días: el menú las gasta antes del domingo.</p>`;
   h += groups;
   if (hidden) h += `<div class="hidden-note"><span>${hidden} básicos no aparecen porque ya los tienes.</span><button class="link" data-goto="despensa">Ver despensa</button></div>`;
   h += `<button class="btn${state.armed ? ' armed' : ''}" data-reset>${state.armed ? 'Toca otra vez para vaciar el carro' : 'Empezar lista nueva'}</button>`;
@@ -1588,7 +1595,7 @@ function renderDetail() {
   const main = !!R[id];
   const r = main ? R[id] : B[id];
   const ing = main ? r.ing.map((x) => x[3]) : r.ing;
-  const rac = main ? (r.batch ? '4 · 2 ahora y 2 al congelador' : '2 personas') : '1 persona';
+  const rac = main ? (r.batch ? '4 · 2 ahora y 2 al congelador' : r.rac === 4 ? '4 · hoy y mañana' : '2 personas') : '1 persona';
   let h = `<div class="d-in">
     <div class="d-bar"><button class="back" data-back>‹ Volver</button></div>
     <div><h2 class="d-title" id="d-title">${esc(r.n)}</h2>
