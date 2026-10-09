@@ -59,6 +59,11 @@
     -webkit-tap-highlight-color: transparent;
   }
   body.lock { overflow: hidden; }
+  .quote { border: 0; border-radius: 18px; padding: 28px 24px 20px; width: min(420px, calc(100% - 32px)); background: var(--surface); color: var(--ink); box-shadow: 0 12px 40px rgba(28, 33, 29, 0.25); text-align: center; }
+  .quote::backdrop { background: rgba(28, 33, 29, 0.55); }
+  .quote .eyebrow { color: var(--accent); }
+  .quote p { font-family: var(--display); font-size: 22px; line-height: 1.35; margin: 12px 0 22px; text-wrap: balance; }
+  .quote .btn { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   button { font: inherit; color: inherit; cursor: pointer; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
   .wrap { max-width: 640px; margin: 0 auto; padding-block: 0 104px; }
@@ -140,11 +145,14 @@
   .day-prep .chip { background: var(--surface); border-color: transparent; color: var(--ink); }
 
   .seg.three button { padding-inline: 4px; font-size: 14.5px; }
-  .slot { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding-block: 7px; border-top: 1px solid var(--line); }
+  .slot { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding-block: 7px; border-top: 1px solid var(--line); }
   .slot-h { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 16px; line-height: 1.2; }
   .slot-h span { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
   .slot-note { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
   .slot-t { font-weight: 700; }
+  .taken { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .taken input { width: 22px; height: 22px; margin: 0; accent-color: var(--olive); }
+  .taken.done { color: var(--muted); }
   .night { margin-top: 8px; background: var(--frz-soft); color: var(--frz); border-radius: 10px; padding: 8px 10px; font-size: 14.5px; font-weight: 700; }
   .why { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
   .why h3 { font-family: var(--display); font-weight: 400; font-size: 18px; margin: 0; }
@@ -256,6 +264,11 @@
   </main>
 </div>
 
+<dialog class="quote" id="quote" aria-labelledby="q-text">
+  <div class="eyebrow">Per a tu, mama</div>
+  <p id="q-text"></p>
+  <button class="btn" type="button" data-quote-ok>Gràcies</button>
+</dialog>
 <div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="d-title"></div>
 
 <nav class="tabs" aria-label="Secciones">
@@ -1261,6 +1274,7 @@ const state = {
   person: store.get('person', 'jordi') === 'carlota' ? 'carlota' : 'jordi',
   recSeg: store.get('recSeg', 'main') === 'brk' ? 'brk' : 'main',
   checks: store.get('checks', {}) || {},
+  taken: store.get('taken', {}) || {},
   pantry: store.get('pantry', {}) || {},
   detail: null,
   armed: false
@@ -1408,6 +1422,14 @@ function personSeg() {
   </div>`;
 }
 
+// Suplementos y medicación tomados hoy. Se guarda con la fecha: al cambiar de día sale todo desmarcado.
+const TAKE = ['Suplementos', 'Medicación', 'Con la comida'];
+const dayKey = () => { const d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); };
+function takenToday() {
+  if (state.taken.day !== dayKey()) state.taken = { day: dayKey(), k: {} };
+  return state.taken.k;
+}
+
 function renderOther() {
   const todayIdx = (new Date().getDay() + 6) % 7;
   const isC = state.person === 'carlota';
@@ -1420,7 +1442,12 @@ function renderOther() {
     const today = i === todayIdx;
     const slots = d.m.map((x) => {
       const what = x.r ? `<button class="rec-link" data-rec="${x.r}">${esc(B[x.r].n)}</button>` : `<span class="slot-t">${esc(x.t)}</span>`;
-      return `<div class="slot"><div class="slot-h">${esc(x.h)}<span>${esc(x.l)}</span></div><div>${what}${x.note ? `<div class="slot-note">${esc(x.note)}</div>` : ''}</div></div>`;
+      let tick = '';
+      if (today && TAKE.includes(x.l)) {
+        const k = state.person + ':' + x.l, on = !!takenToday()[k];
+        tick = `<label class="taken${on ? ' done' : ''}"><input type="checkbox" data-take="${esc(k)}"${on ? ' checked' : ''}>${on ? 'Tomado hoy' : 'Marcar como tomado'}</label>`;
+      }
+      return `<div class="slot"><div class="slot-h">${esc(x.h)}<span>${esc(x.l)}</span></div><div>${what}${x.note ? `<div class="slot-note">${esc(x.note)}</div>` : ''}${tick}</div></div>`;
     }).join('');
     return `<article class="day${today ? ' is-today' : ''}">
       <div class="day-h"><span class="day-n">${esc(d.d)}</span>${d.train ? '<span class="bdg batch">Día de entreno</span>' : ''}${today ? '<span class="bdg today">Hoy</span>' : ''}</div>
@@ -1682,6 +1709,14 @@ document.addEventListener('click', (ev) => {
 
 document.addEventListener('change', (ev) => {
   const el = ev.target;
+  if (el.matches('[data-take]')) {
+    const tk = takenToday();
+    if (el.checked) tk[el.dataset.take] = true; else delete tk[el.dataset.take];
+    store.set('taken', state.taken);
+    const lb = el.closest('.taken');
+    lb.classList.toggle('done', el.checked); lb.lastChild.textContent = el.checked ? 'Tomado hoy' : 'Marcar como tomado';
+    return;
+  }
   if (!el.matches('[data-ck]')) return;
   const k = el.dataset.ck, ck = weekChecks();
   if (el.checked) { ck[k] = true; if (ITEMS[k].p) state.pantry[k] = 'tengo'; }
@@ -1696,10 +1731,77 @@ document.addEventListener('change', (ev) => {
   if (p) { p.innerHTML = `<span><b>${done}</b> de ${boxes.length} en el carro</span><span>${pct} %</span>`; $('#v-compra .bar i').style.width = pct + '%'; }
 });
 
+// Si la app se queda abierta de un día para otro, al volver a ella se redibuja con las casillas del día nuevo.
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && state.tab === 'menu' && state.menuOther && state.taken.day !== dayKey()) render();
+});
+
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && state.detail) closeDetail(); });
 
 render();
 if (state.tab === 'menu') setTimeout(() => focusToday(false), 60);
+
+// Una frase al dia, a l'atzar entre les que encara no han sortit. Quan han sortit totes, es torna a començar.
+const QUOTES = [
+  'No has de ser perfecta. Només has de ser-hi, i ja hi ets.',
+  'El teu amor és el lloc més segur del món.',
+  'Cuidar-te a tu també és cuidar-lo a ell.',
+  'Els dies són llargs, però els anys són curts. Gaudeix d\'aquest moment.',
+  'Ets exactament la mare que el teu fill necessita.',
+  'No cal fer-ho tot avui. N\'hi ha prou amb fer el que pots.',
+  'Cada abraçada que li dones el fa créixer una mica més fort.',
+  'Descansar no és rendir-se. És agafar forces per continuar.',
+  'Ets més forta del que et penses, i més valenta del que creus.',
+  'Les nits sense dormir passaran. L\'amor que hi has posat, es queda.',
+  'Està bé demanar ajuda. Les bones mares també ho fan.',
+  'El teu fill no et vol perfecta: et vol a tu.',
+  'Avui has fet coses invisibles que valen moltíssim.',
+  'Respira a fons. Ho estàs fent millor del que et penses.',
+  'Ser mare és aprendre cada dia, i tu aprens de pressa.',
+  'Un mal dia no et fa mala mare. Et fa humana.',
+  'Tot el que fas amb amor deixa empremta, encara que no la vegis.',
+  'Confia en tu: ningú no el coneix tan bé com tu.',
+  'Petits passos també són avançar.',
+  'El teu cos ha fet una cosa meravellosa. Tracta\'l amb carinyo.',
+  'Hi ha dies per córrer i dies per abraçar. Tots dos compten.',
+  'La teva paciència d\'avui serà la seva calma de demà.',
+  'Quan et sembli que no arribes, recorda tot el que ja has aconseguit.',
+  'Mereixes la mateixa tendresa que dones.',
+  'No et comparis: la teva manera de ser mare és la bona.',
+  'Somriu: algú petit et mira com si fossis tot el seu món.',
+  'Avui pots ser suau amb tu mateixa.',
+  'L\'amor no es mesura en hores perfectes, sinó en moments compartits.',
+  'Ets casa per a ell. I això és immens.',
+  'Cada dia que el cuides és un regal que durarà tota la seva vida.',
+  'No cal tenir totes les respostes. N\'hi ha prou amb estimar-lo.',
+  'La teva veu és la seva cançó preferida.',
+  'Avui, una mica de calma per a tu també.',
+  'Créixer junts vol dir equivocar-se junts, i tornar-ho a provar.',
+  'El cansament passa. Els records bonics es queden.',
+  'Ets el seu primer amor i la seva primera llar.',
+  'Fes-te un petó a tu mateixa: t\'ho has guanyat.',
+  'Quan ell somriu, també somriu tot el que has fet per ell.',
+  'La força d\'una mare no fa soroll, però ho sosté tot.',
+  'Ets suficient. Avui i cada dia.'
+];
+(function showQuote() {
+  const dlg = $('#quote');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+  const today = store.get('quoteDay', {});
+  let i = today.i;
+  if (today.day !== dayKey() || !(i < QUOTES.length)) {
+    let seen = (store.get('quoteSeen', []) || []).filter((n) => n < QUOTES.length);
+    if (seen.length >= QUOTES.length) seen = [];
+    const left = QUOTES.map((_, n) => n).filter((n) => !seen.includes(n) && n !== today.i);
+    i = left.length ? left[Math.floor(Math.random() * left.length)] : 0;
+    store.set('quoteSeen', [...seen, i]);
+    store.set('quoteDay', { day: dayKey(), i });
+  }
+  $('#q-text').textContent = QUOTES[i];
+  dlg.addEventListener('cancel', (ev) => ev.preventDefault()); // Cal tocar el botó per tancar-la.
+  $('[data-quote-ok]', dlg).addEventListener('click', () => dlg.close());
+  dlg.showModal();
+})();
 </script>
 </body>
 </html>
